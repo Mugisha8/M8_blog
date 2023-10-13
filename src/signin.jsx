@@ -21,7 +21,6 @@ function Signin() {
                 className="login_text"
                 placeholder="Password"
               />
-
               <Link to="/">
                 <span>Forgot Password ?</span>
               </Link>
