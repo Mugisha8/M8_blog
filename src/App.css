@@ -1,0 +1,232 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  text-decoration: none;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.menus {
+  background-color: black;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0px;
+  position: fixed;
+  color: white;
+}
+.text {
+  color: #fff;
+}
+.menus ul {
+  display: flex;
+
+  gap: 15px;
+}
+
+.dash_container {
+  padding: 7% 10%;
+}
+.hero {
+  background-color: #35b3a3;
+  height: 250px;
+
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.hero h2 {
+  font-size: 26px;
+}
+
+.button_hero {
+  width: 200px;
+  margin-top: 30px;
+  background: transparent;
+  color: white;
+  border: 3px solid white;
+}
+.button_hero:hover {
+  width: 200px;
+  margin-top: 30px;
+  background: black;
+  color: white;
+  border: none;
+  transition: 2s;
+}
+
+.card_photo {
+  width: 100%;
+  height: 20rem;
+}
+
+.blog_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  height: auto;
+  padding: 10px 0px;
+}
+
+.card_blog {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0px 3px 10px 3px rgba(50, 50, 50, 0.2);
+}
+.card_blog h4 {
+  text-align: center;
+}
+
+.footer {
+  background-color: black;
+  height: 130px;
+  width: 98vw;
+}
+.footer p {
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding: 10px 0;
+}
+
+.input_news {
+  width: 600px;
+  height: 2.8rem;
+}
+form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.newsletter {
+  background-color: black;
+  border: 3px solid white;
+  color: white;
+}
+
+.newsletter:hover {
+  background-color: #35b3a3;
+}
+
+.wrapper {
+  padding: 10% 0;
+  display: flex;
+  width: 60rem;
+  margin-left: 18%;
+}
+.wrapper_login {
+  background-color: #35b3a3;
+  width: 90%;
+  height: 28rem;
+  align-items: center;
+  box-shadow: 10px 12px 1px 8px #f8fafa;
+}
+.wrapper_login h2 {
+  color: white;
+  text-align: center;
+  padding: 10% 0%;
+}
+.wrapper_login button {
+  background-color: black;
+  color: white;
+}
+.wrapper_login span {
+  color: white;
+}
+.form_login {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 50px;
+  justify-content: center;
+}
+.form_login .login_text {
+  height: 2rem;
+}
+.wrapper_welcome {
+  background-color: black;
+  color: white;
+  width: 75%;
+  height: 23rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 25px;
+}
+.wrapper_welcome h2 {
+  text-align: center;
+}
+.wrapper_welcome button {
+  background-color: #35b3a3;
+  color: white;
+  width: 60%;
+  margin-left: 20%;
+}
+
+/*sign up---------------------------------*/
+
+.signup_wrapper {
+  padding: 10% 0;
+  display: flex;
+  width: 60rem;
+  margin-left: 18%;
+}
+.wrapper_signup {
+  background-color: #35b3a3;
+  width: 90%;
+  height: 28rem;
+  align-items: center;
+  box-shadow: 10px 12px 1px 8px #f8fafa;
+}
+.wrapper_signup h2 {
+  color: white;
+  text-align: center;
+  padding: 10% 0%;
+}
+.wrapper_signup button {
+  background-color: black;
+  color: white;
+}
+.wrapper_signup span {
+  color: white;
+}
+.form_create {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 50px;
+  justify-content: center;
+}
+.form_create .signup_text {
+  height: 2rem;
+}
+.wrapper_welcome {
+  background-color: black;
+  color: white;
+  width: 75%;
+  height: 23rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 25px;
+}
+.wrapper_welcome h2 {
+  text-align: center;
+}
+.wrapper_welcome button {
+  background-color: #35b3a3;
+  color: white;
+  width: 60%;
+  margin-left: 20%;
+}
