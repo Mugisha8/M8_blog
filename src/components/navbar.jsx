@@ -5,7 +5,8 @@ const Navbar = () => {
   return (
     <>
       <div className="menus">
-        <h2>LOGO</h2>
+        <h2>M8 Engine Blogs</h2>
+
         <ul>
           <Link to="/" className="text">
             Home
@@ -24,8 +25,7 @@ const Navbar = () => {
           </Link>
         </ul>
         <Link to="/signin">
-          {" "}
-          <h3>SIGN IN</h3>{" "}
+          <button class="dash_signin">SIGN IN</button>
         </Link>
       </div>
     </>

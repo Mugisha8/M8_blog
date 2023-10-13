@@ -11,21 +11,31 @@ html {
 .menus {
   background-color: black;
   width: 100%;
-  top: 0;
-  left: 0;
   display: flex;
+  top:0;
   justify-content: space-between;
-  padding: 20px 0px;
   position: fixed;
   color: white;
-}
-.text {
-  color: #fff;
+  padding: 10px 10px 25px 0px;
 }
 .menus ul {
+  display: block;
   display: flex;
+  gap: 10px;
+  font-size: 17px;
+}
+.menus h2{
+  margin: 0px 20px;
+}
+.dash_signin{
+  background-color: #35b3a3;
+  color: white;
+ margin: 0 15px;
+}
 
-  gap: 15px;
+
+.text {
+  color: white;
 }
 
 .dash_container {
@@ -229,4 +239,68 @@ form {
   color: white;
   width: 60%;
   margin-left: 20%;
+}
+
+#about_content {
+  padding: 6% 20%;
+}
+
+.text_grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
+  padding: 10px 0px;
+}
+
+.imagecover {
+  width: 100%;
+  height: 25rem;
+}
+
+#about_content h2 {
+  text-align: center;
+  padding: 20px;
+}
+
+#contact_content {
+  padding: 6% 16%;
+}
+
+#contact_content h2 {
+  text-align: center;
+  padding: 20px;
+}
+
+.contact_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 20px 0%;
+}
+
+.contact_form {
+  display: flex;
+  flex-direction: column;
+}
+.contact_text {
+  height: 4rem;
+  border: none;
+  border-bottom: 2px solid grey;
+  outline: none;
+}
+.contact_form textarea {
+  height: 6rem;
+  border: none;
+  border-bottom: 2px solid grey;
+  outline: none;
+}
+.contact_form button {
+  background-color: #35b3a3;
+}
+.contact_form button:hover {
+  background-color: black;
+  color: white;
+}
+
+#blog_content {
+  padding: 6% 16%;
 }
