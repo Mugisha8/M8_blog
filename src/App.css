@@ -46,6 +46,10 @@ html {
   color: #35b3a2e4;
 }
 
+.MobileMenu {
+  display: none;
+}
+
 .dash_container {
   padding: 7% 10%;
 }
@@ -471,18 +475,91 @@ form {
     width: 500px;
     height: 2.8rem;
   }
+  .related_post {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .contact_grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
+
+  .wrapper {
+    display: grid;
+    margin-left: 10%;
+    width: 43rem;
+    margin-top: 7%;
+  }
+  .wrapper_welcome {
+    width: 36rem;
+  }
+  .signup_wrapper {
+    display: grid;
+    margin-left: 6%;
+    width: 43rem;
+    margin-top: 7%;
+  }
 }
 
 @media screen and (max-width: 690px) {
+  .menus {
+    display: flex;
+  }
   .menus ul {
     display: none;
+    flex-direction: column;
+    margin-top: 20%;
   }
-
+  .menus ul.open {
+    display: flex;
+  }
+  .MobileMenu {
+    display: block;
+  }
+  .dash_signin {
+    display: block;
+  }
+  #mobile {
+    padding-left: 20px;
+  }
   .blog_grid {
     grid-template-columns: auto;
   }
+
+  .related_post {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+  }
+
+  .text_grid {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 20px;
+    padding: 10px 0px;
+  }
+  .contact_grid {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px;
+  }
+
   .input_news {
     width: 360px;
     height: 2.8rem;
+  }
+
+  .wrapper {
+    display: grid;
+    margin-left: 6%;
+    width: 33rem;
+    margin-top: 7%;
+  }
+  .signup_wrapper {
+    display: grid;
+    margin-left: 6%;
+    width: 33rem;
+    margin-top: 7%;
+  }
+  .wrapper_welcome {
+    width: 27rem;
   }
 }
