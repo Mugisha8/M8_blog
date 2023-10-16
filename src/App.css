@@ -463,7 +463,6 @@ form {
   height: 3rem;
   border-radius: 2rem;
 }
-
 @media screen and (max-width: 980px) {
   .blog_grid {
     grid-template-columns: auto auto;
