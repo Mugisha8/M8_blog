@@ -4,7 +4,7 @@ import Card_blogs from "./components/Card_blogs";
 import Footer from "./components/footer";
 import { Link } from "react-router-dom";
 
-function Dashboard() {
+function Sysblog() {
   const Blogs = [
     {
       photo:
@@ -12,6 +12,8 @@ function Dashboard() {
       title: "Throwback to the Good Old Days",
       Description:
         "Throwback to the Good Old Days takes us on a journey down memory lane, where cherished moments from the past come alive. Its a heartwarming reminder of simpler times, when life was filled with innocence, laughter, and the joy of discovery. This nostalgic trip offers a chance to revisit old photographs, reminisce about favorite childhood games, and bask in the warmth of memories that have stood the test of time. ",
+      Edit: "Edit",
+      Delete: "Delete",
     },
     {
       photo:
@@ -19,6 +21,8 @@ function Dashboard() {
       title: "The Art Of Visual Story telling",
       Description:
         "Throwback to the Good Old Days takes us on a journey down memory lane, where cherished moments from the past come alive. Its a heartwarming reminder of simpler times, when life was filled with innocence, laughter, and the joy of discovery. This nostalgic trip offers a chance to revisit old photographs, reminisce about favorite childhood games, and bask in the warmth of memories that have stood the test of time. ",
+      Edit: "Edit",
+      Delete: "Delete",
     },
     {
       photo:
@@ -26,6 +30,8 @@ function Dashboard() {
       title: "Create Meaningful Family Moments.",
       Description:
         "Throwback to the Good Old Days takes us on a journey down memory lane, where cherished moments from the past come alive. Its a heartwarming reminder of simpler times, when life was filled with innocence, laughter, and the joy of discovery. This nostalgic trip offers a chance to revisit old photographs, reminisce about favorite childhood games, and bask in the warmth of memories that have stood the test of time. ",
+      Edit: "Edit",
+      Delete: "Delete",
     },
     {
       photo:
@@ -33,6 +39,8 @@ function Dashboard() {
       title: "What Your Music Preference Says AboutYou",
       Description:
         "Throwback to the Good Old Days takes us on a journey down memory lane, where cherished moments from the past come alive. Its a heartwarming reminder of simpler times, when life was filled with innocence, laughter, and the joy of discovery. This nostalgic trip offers a chance to revisit old photographs, reminisce about favorite childhood games, and bask in the warmth of memories that have stood the test of time. ",
+      Edit: "Edit",
+      Delete: "Delete",
     },
     {
       photo:
@@ -40,6 +48,8 @@ function Dashboard() {
       title: "Just a Standard Format Post. ",
       Description:
         "Throwback to the Good Old Days takes us on a journey down memory lane, where cherished moments from the past come alive. Its a heartwarming reminder of simpler times, when life was filled with innocence, laughter, and the joy of discovery. This nostalgic trip offers a chance to revisit old photographs, reminisce about favorite childhood games, and bask in the warmth of memories that have stood the test of time. ",
+      Edit: "Edit",
+      Delete: "Delete",
     },
     {
       photo:
@@ -47,6 +57,8 @@ function Dashboard() {
       title: "No Sugar Oatmeal Cookies.",
       Description:
         "Throwback to the Good Old Days takes us on a journey down memory lane, where cherished moments from the past come alive. Its a heartwarming reminder of simpler times, when life was filled with innocence, laughter, and the joy of discovery. This nostalgic trip offers a chance to revisit old photographs, reminisce about favorite childhood games, and bask in the warmth of memories that have stood the test of time. ",
+      Edit: "Edit",
+      Delete: "Delete",
     },
     {
       photo:
@@ -54,6 +66,8 @@ function Dashboard() {
       title: "Throwback to the Good Old Days",
       Description:
         "Throwback to the Good Old Days takes us on a journey down memory lane, where cherished moments from the past come alive. Its a heartwarming reminder of simpler times, when life was filled with innocence, laughter, and the joy of discovery. This nostalgic trip offers a chance to revisit old photographs, reminisce about favorite childhood games, and bask in the warmth of memories that have stood the test of time. ",
+      Edit: "Edit",
+      Delete: "Delete",
     },
     {
       photo:
@@ -61,6 +75,8 @@ function Dashboard() {
       title: "Throwback to the Good Old Days",
       Description:
         "Throwback to the Good Old Days takes us on a journey down memory lane, where cherished moments from the past come alive. Its a heartwarming reminder of simpler times, when life was filled with innocence, laughter, and the joy of discovery. This nostalgic trip offers a chance to revisit old photographs, reminisce about favorite childhood games, and bask in the warmth of memories that have stood the test of time. ",
+      Edit: "Edit",
+      Delete: "Delete",
     },
     {
       photo:
@@ -68,6 +84,8 @@ function Dashboard() {
       title: "Throwback to the Good Old Days",
       Description:
         "Throwback to the Good Old Days takes us on a journey down memory lane, where cherished moments from the past come alive. Its a heartwarming reminder of simpler times, when life was filled with innocence, laughter, and the joy of discovery. This nostalgic trip offers a chance to revisit old photographs, reminisce about favorite childhood games, and bask in the warmth of memories that have stood the test of time. ",
+      Edit: "Edit",
+      Delete: "Delete",
     },
   ];
 
@@ -84,9 +102,9 @@ function Dashboard() {
               Connect with us in this digital era and stick to the fore front
               position globally with meight blogs
             </p>
-            <Link to="/signin">
+            <Link to="/Add_blog">
               {" "}
-              <button className="button_hero">GET STARTED</button>
+              <button className="button_hero">Add Blog</button>
             </Link>
           </div>
 
@@ -97,6 +115,8 @@ function Dashboard() {
                 image={blog.photo}
                 title={blog.title}
                 Description={blog.Description}
+                edit={blog.Edit}
+                trash={blog.Delete}
               />
             ))}
           </div>
@@ -109,4 +129,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Sysblog;

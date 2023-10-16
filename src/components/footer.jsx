@@ -4,8 +4,8 @@ function Footer() {
   return (
     <section id="footer">
       <div className="footer">
-        <p> &copy; All right reserved M8 engine blogs || 2023</p>
-        <form method="POST">
+        <p> &copy; All right reserved Meight blogs || 2023</p>
+        <form method="POST" className="footer_form">
           <input
             type="text"
             name="newsletter"
