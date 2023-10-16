@@ -13,7 +13,7 @@ function Signin() {
       <section id="login">
         <div className="wrapper">
           <div className="wrapper_login">
-            <h2>Engine Blog SIGNIN</h2>
+            <h2>Meight Blog SIGNIN</h2>
             <form method="POST" class="form_login">
               <input type="text" className="login_text" placeholder="Email.." />
               <input
@@ -25,19 +25,22 @@ function Signin() {
                 <span>Forgot Password ?</span>
               </Link>
 
-              <button>SIGN IN</button>
+              <Link to="/Sys_blog">
+                {" "}
+                <button>SIGN IN</button>{" "}
+              </Link>
             </form>
           </div>
           <div className="wrapper_welcome">
             <h2>Join Us </h2>
             <p>
               We are thrilled to have you join our vibrant community on our
-              <b> M8 Engine blog platform</b>, and we extend our warmest welcome
-              to you. Your presence is a valuable addition to our growing family
-              of writers, readers, and enthusiasts who share a passion for
-              engaging content and thoughtful discussions. Our community is
-              diverse and supportive, and we encourage you to explore, engage,
-              and connect with fellow bloggers who share your interests.
+              <b> Meight blog platform</b>, and we extend our warmest welcome to
+              you. Your presence is a valuable addition to our growing family of
+              writers, readers, and enthusiasts who share a passion for engaging
+              content and thoughtful discussions. Our community is diverse and
+              supportive, and we encourage you to explore, engage, and connect
+              with fellow bloggers who share your interests.
             </p>
             <Link to="/signup">
               <button className="create">Create An Account</button>

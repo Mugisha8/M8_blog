@@ -23,10 +23,10 @@ function About() {
             <CoverImage key={index} image={cover.image} />
           ))}
         </div>
-        <h2>Hello, We Are M8 ENGINE Blog.</h2>
+        <h2>Hello, We Are Meight Blog.</h2>
         <p>
           Dear User, We are thrilled to have you join our vibrant community on
-          Our blog <b>M8 Engines blog platform</b>, and we extend our warmest
+          Our blog <b>Meight blog platform</b>, and we extend our warmest
           welcome to you. Your presence is a valuable addition to our growing
           family of writers, readers, and enthusiasts who share a passion for
           engaging content and thoughtful discussions. Blogging is not just

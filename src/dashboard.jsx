@@ -79,10 +79,10 @@ function Dashboard() {
       <section id="content">
         <div className="dash_container">
           <div class="hero">
-            <h2>Welcome to M8 Engine Blog</h2>
+            <h2>Welcome to Meight Blogs</h2>
             <p>
               Connect with us in this digital era and stick to the fore front
-              position globally with m8 engine blog
+              position globally with meight blogs
             </p>
             <Link to="/signin">
               {" "}

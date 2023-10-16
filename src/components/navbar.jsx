@@ -5,7 +5,10 @@ const Navbar = () => {
   return (
     <>
       <div className="menus">
-        <h2>M8 Engine Blogs</h2>
+        <Link to="/">
+          {" "}
+          <h2>M<span class="logo">eight</span> Blogs</h2>
+        </Link>
 
         <ul>
           <Link to="/" className="text">
