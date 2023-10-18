@@ -13,12 +13,17 @@ function Signup() {
       <section id="create">
         <div className="signup_wrapper">
           <div className="wrapper_signup">
-            <h2>Engine Blog SIGNUP</h2>
+            <h2>Meight Blog SIGNUP</h2>
             <form method="POST" class="form_create">
               <input
                 type="text"
                 className="signup_text"
-                placeholder="Username"
+                placeholder="Firstname"
+              />
+              <input
+                type="text"
+                className="signup_text"
+                placeholder="Lastname"
               />
               <input type="text" className="signup_text" placeholder="Email" />
               <input
@@ -39,12 +44,12 @@ function Signup() {
             <h2>Join Us </h2>
             <p>
               We are thrilled to have you join our vibrant community on our
-              <b> M8 Engine blog platform</b>, and we extend our warmest welcome
-              to you. Your presence is a valuable addition to our growing family
-              of writers, readers, and enthusiasts who share a passion for
-              engaging content and thoughtful discussions. Our community is
-              diverse and supportive, and we encourage you to explore, engage,
-              and connect with fellow bloggers who share your interests.
+              <b> Meight blog platform</b>, and we extend our warmest welcome to
+              you. Your presence is a valuable addition to our growing family of
+              writers, readers, and enthusiasts who share a passion for engaging
+              content and thoughtful discussions. Our community is diverse and
+              supportive, and we encourage you to explore, engage, and connect
+              with fellow bloggers who share your interests.
             </p>
             <Link to="/signin">
               <button className="create">Login</button>
