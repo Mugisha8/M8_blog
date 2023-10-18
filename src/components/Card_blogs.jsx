@@ -3,7 +3,8 @@ import React from "react";
 const Card_blogs = ({ image, title, Description, edit, trash }) => {
   return (
     <div className="card_blog">
-      <img src={image} alt="" className="card_photo" />
+      <img src={image} alt="Read More" className="card_photo" />
+      <div className="image_overlay">Read More</div>
       <h4>{title}</h4>
       <p>{Description}</p>
       <div className="modification">

@@ -41,7 +41,9 @@ function Signup() {
             </form>
           </div>
           <div className="wrapper_welcome">
-            <h2>Join Us </h2>
+          <h2>
+              M<span class="logo">eight</span> Blogs
+            </h2>
             <p>
               We are thrilled to have you join our vibrant community on our
               <b> Meight blog platform</b>, and we extend our warmest welcome to
