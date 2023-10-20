@@ -3,7 +3,7 @@ import { IconContext } from "react-icons";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 
-const Navbar = () => {
+const Navbar = () => { 
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (

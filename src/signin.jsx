@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import { Link } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 function Signin() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const logindata = { email, password };
+
+  const handlelogin = async (dataf) => {
+    try {
+      const responses = await fetch(
+        "https://zigirumugabe-pacifique.onrender.com/api/Klab/user/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dataf),
+        }
+      );
+
+      if (responses.ok) {
+        const data = await responses.json();
+        console.log("response", data);
+        localStorage.setItem("token", data.token);
+        alert("Sign IN successfully");
+
+        setEmail("");
+        setPassword("");
+
+        history.push("/dashboard");
+      } else {
+        console.log("failed to login");
+        alert("failed to login");
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
     <>
       <section id="navbar">
@@ -14,25 +50,39 @@ function Signin() {
         <div className="wrapper">
           <div className="wrapper_login">
             <h2>Meight Blog SIGNIN</h2>
-            <form method="POST" class="form_login">
-              <input type="text" className="login_text" placeholder="Email.." />
+            <form method="POST" className="form_login">
+              <input
+                type="text"
+                className="login_text"
+                placeholder="Email.."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
               <input
                 type="password"
                 className="login_text"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <Link to="/">
                 <span>Forgot Password ?</span>
               </Link>
 
-              <Link to="/Sys_blog">
-                {" "}
-                <button>SIGN IN</button>{" "}
-              </Link>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlelogin(logindata);
+                }}
+              >
+                SIGN IN
+              </button>
             </form>
           </div>
           <div className="wrapper_welcome">
-            <h2>Join Us </h2>
+            <h2>
+              M<span className="logo">eight</span> Blogs
+            </h2>
             <p>
               We are thrilled to have you join our vibrant community on our
               <b> Meight blog platform</b>, and we extend our warmest welcome to

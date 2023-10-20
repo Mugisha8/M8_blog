@@ -21,7 +21,7 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/Sys_blog" element={<Sysblog />} />
-        <Route path="/Add_blog" element={<Add_blog />}/>
+        <Route path="/Add_blog" element={<Add_blog />} />
       </Routes>
     </Router>
   );

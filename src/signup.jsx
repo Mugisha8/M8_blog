@@ -1,9 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import { Link } from "react-router-dom";
 
 function Signup() {
+  const [firstname, setfirstname] = useState("");
+  const [lastname, setlastname] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [profile, setProfile] = useState(null);
+
+  const signupdata = { firstname, lastname, email, password, profile };
+
+  const handlesignup = async (data) => {
+    try {
+      const response = await fetch(
+        "https://zigirumugabe-pacifique.onrender.com/api/Klab/user/signup",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (response.ok) {
+        const datas = await response.JSON();
+        console.log("response", datas);
+        alert("USER registered succesfully");
+      } else {
+        console.log("Failed to register your INFO");
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
     <>
       <section id="navbar">
@@ -14,34 +45,57 @@ function Signup() {
         <div className="signup_wrapper">
           <div className="wrapper_signup">
             <h2>Meight Blog SIGNUP</h2>
-            <form method="POST" class="form_create">
+            <form className="form_create">
               <input
                 type="text"
                 className="signup_text"
                 placeholder="Firstname"
+                value={firstname}
+                onChange={(e) => setfirstname(e.target.value)}
               />
               <input
                 type="text"
                 className="signup_text"
                 placeholder="Lastname"
+                value={lastname}
+                onChange={(e) => setlastname(e.target.value)}
               />
-              <input type="text" className="signup_text" placeholder="Email" />
+              <input
+                type="text"
+                className="signup_text"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setemail(e.target.value)}
+              />
+
               <input
                 type="password"
                 className="signup_text"
                 placeholder="Password"
-              />
-              <input
-                type="password"
-                className="signup_text"
-                placeholder="Confirm Password"
+                value={password}
+                onChange={(e) => setpassword(e.target.value)}
               />
 
-              <button>Create an account</button>
+              <input
+                type="file"
+                className="file_img"
+                onChange={(e) => setProfile(e.target.files[0])}
+              />
+
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlesignup(signupdata);
+                }}
+              >
+                Create an account
+              </button>
             </form>
           </div>
           <div className="wrapper_welcome">
-            <h2>Join Us </h2>
+            <h2>
+              M<span className="logo">eight</span> Blogs
+            </h2>
             <p>
               We are thrilled to have you join our vibrant community on our
               <b> Meight blog platform</b>, and we extend our warmest welcome to
