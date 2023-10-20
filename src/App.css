@@ -259,15 +259,18 @@ form {
 .form_create {
   display: flex;
   flex-direction: column;
-  padding: 5px 55px;
+  padding: 8px 55px;
   justify-content: center;
 }
 .form_create .signup_text {
   height: 1rem;
   padding: 10px;
   border-radius: 4px;
+  outline: none;
 }
-
+.form_create .file_img {
+  padding: 10px 0;
+}
 .wrapper_welcome {
   background-color: black;
   color: white;
@@ -451,11 +454,12 @@ form {
 .addblog_text {
   width: 55vh;
   border: none;
+
   border-bottom: 2px solid gray;
   outline-color: #35b3a3;
 }
 .addblog_desc {
-  height: 28vh;
+  height: 25vh;
   width: 55vh;
   border: none;
   outline-color: #35b3a3;
@@ -496,6 +500,13 @@ form {
   height: 3rem;
   border-radius: 2rem;
 }
+
+.preview {
+  border: 3px dotted;
+  width: 400px;
+  height: 300px;
+}
+
 @media screen and (max-width: 980px) {
   .blog_grid {
     grid-template-columns: auto auto;
