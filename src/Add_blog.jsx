@@ -1,53 +1,74 @@
 import React, { useState } from "react";
-import Navbar from "./components/navbar";
+import Admin_navbar from "./components/Admin_navbar";
 import Footer from "./components/footer";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Add_blog = () => {
+  const navigate = useNavigate();
+
   const [blogTitle, setblogTitle] = useState("");
   const [blogContent, setblogContent] = useState("");
   const [blog_Image, setblog_Image] = useState("");
 
-  const BlogData = {
-    blogTitle,
-    blogContent,
-    blog_Image,
+  // const BlogData = {
+  //   blogTitle,
+  //   blogContent,
+  //   blog_Image,
+  // };
+
+  // const [imgfile, uploading] = useState("");
+
+  // const imgFilehandler = (e) => {
+  //   if (e.target.files.length !== 0) {
+  //     uploading(URL.createObjectURL(e.target.files[0]));
+  //   }
+  //   setblog_Image(e.target.value);
+  // };
+
+  const token = localStorage.getItem("token");
+  console.log("Token =", token);
+
+  const configuration = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   };
 
-  const [imgfile, uploading] = useState("");
+  const handleblog = async (e) => {
+    e.preventDefault();
 
-  const imgFilehandler = (e) => {
-    if (e.target.files.length !== 0) {
-      uploading(URL.createObjectURL(e.target.files[0]));
-    }
-    setblog_Image(e.target.value);
-  };
+    const imageInput = document.getElementById("imageInput");
+    const blog_Image = imageInput.files[0];
 
-  const handleblog = async (data) => {
+    const BlogData = new FormData();
+    BlogData.append("blogTitle", blogTitle);
+    BlogData.append("blogContent", blogContent);
+    BlogData.append("blog_Image", blog_Image);
+
     try {
-      const response = await fetch(
+      const make = await axios.post(
         "https://zigirumugabe-pacifique.onrender.com/api/klab/blog/createBlog",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        }
+        BlogData,
+        configuration
       );
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Response:", data);
-        alert("Blog is Posted");
-      } else {
-        console.log("failed to add blog");
+
+      console.log(make);
+      if (make.status === 200) {
+        alert("blog created successfuly");
+        navigate("/Sys_blog");
       }
     } catch (error) {
-      console.error("Error", error);
+      console.log(error);
+      alert("failed to post a blog");
     }
   };
+
   return (
     <>
       <section id="navbar">
-        <Navbar />
+        <Admin_navbar />
       </section>
 
       <section id="content_blog">
@@ -75,23 +96,23 @@ const Add_blog = () => {
               value={blogContent}
               onChange={(e) => setblogContent(e.target.value)}
             ></textarea>
-            <input type="file" value={blog_Image} onChange={imgFilehandler} />
-            <div className="preview">
+            <input
+              type="file"
+              value={blog_Image}
+              id="imageInput"
+              accept="image/*"
+              onChange={(e) => setblog_Image(e.target.value)}
+            />
+            {/* <div className="preview">
               <img
                 src={imgfile}
                 alt="BLOG IMAGE PREVIEW"
                 width="400px"
                 height="300px"
               />
-            </div>
+            </div> */}
             <button className="cancel">Cancel</button>
-            <button
-              className="publish"
-              onClick={(e) => {
-                e.preventDefault();
-                handleblog(BlogData);
-              }}
-            >
+            <button className="publish" onClick={handleblog}>
               Publish
             </button>
 

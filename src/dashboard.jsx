@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./components/navbar";
 import Card_blogs from "./components/Card_blogs";
 import Footer from "./components/footer";
-import { Link } from "react-router-dom";
 
-function Dashboard() {
+function Dashboard({}) {
   // const Blogs = [
   //   {
   //     photo:
@@ -72,18 +71,19 @@ function Dashboard() {
   //   },
   // ];
 
-  const [postss, setPostss] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch(
-      "https://zigirumugabe-pacifique.onrender.com/api/klab/blog/ViewAllBlogs"
-    )
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          setPostss(res.data);
-        }
-      });
+    const fetchData = async () => {
+      await fetch(
+        "https://zigirumugabe-pacifique.onrender.com/api/klab/blog/ViewAllBlogs"
+      )
+        .then((response) => response.json())
+        .then((res) => {
+          setPosts(res);
+        });
+    };
+    fetchData();
   }, []);
 
   return (
@@ -96,47 +96,47 @@ function Dashboard() {
           <div class="hero">
             <h2>Welcome to Meight Blogs</h2>
             <p>
-              Connect with us in this digital era and stick to the fore front
-              position globally with meight blogs
+              We are thrilled to have you join our vibrant community on our
+              <b> Meight blog platform</b>, and we extend our warmest welcome to
+              you. Your presence is a valuable addition to our growing family of
+              writers, readers, and enthusiasts who share a passion for engaging
+              content and thoughtful discussions. Our community is diverse and
+              supportive, and we encourage you to explore, engage, and connect
+              with fellow bloggers who share your interests.
             </p>
-            <Link to="/signin">
-              {" "}
-              <button className="button_hero">GET STARTED</button>
-            </Link>
           </div>
 
-          <Link to="/blogpost">
-            <div className="blog_grid">
-              {postss.length > 0 ? (
-                postss.map((post, index) => (
-                  <Card_blogs
-                    key={index}
-                    title={post.blogTitle}
-                    Description={post.blogContent}
-                    image={post.blog_Image}
-                  />
-                ))
-              ) : (
+          <div className="blog_grid">
+            {posts.length > 0 ? (
+              posts.map((post, index) => (
+                <Card_blogs
+                  key={index}
+                  id={post._id}
+                  title={post.blogTitle}
+                  Description={post.blogContent}
+                  image={post.blog_Image}
+                />
+              ))
+            ) : (
+              <p>
+                <iframe
+                  src="https://giphy.com/embed/swhRkVYLJDrCE"
+                  width="380"
+                  height="300"
+                  frameBorder="0"
+                  class="giphy-embed"
+                  allowFullScreen
+                ></iframe>
                 <p>
-                  <iframe
-                    src="https://giphy.com/embed/swhRkVYLJDrCE"
-                    width="380"
-                    height="300"
-                    frameBorder="0"
-                    class="giphy-embed"
-                    allowFullScreen
-                  ></iframe>
-                  <p>
-                    <center>
-                      <a href="https://giphy.com/gifs/google-icon-loading-swhRkVYLJDrCE">
-                        via GIPHY
-                      </a>
-                    </center>
-                  </p>
+                  <center>
+                    <a href="https://giphy.com/gifs/google-icon-loading-swhRkVYLJDrCE">
+                      via GIPHY
+                    </a>
+                  </center>
                 </p>
-              )}
-            </div>
-          </Link>
+              </p>
+            )}
+          </div>
         </div>
       </section>
       <section id="footer">

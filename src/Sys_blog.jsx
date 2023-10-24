@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/navbar";
+import Admin_navbar from "./components/Admin_navbar";
 import Card_blogs from "./components/Card_blogs";
 import Footer from "./components/footer";
 import { Link, json } from "react-router-dom";
+import { FiSettings } from "react-icons/Fi";
+import { MdAddToPhotos } from "react-icons/Md";
+import Admin_card_blog from "./components/admin_card_blog";
 
 function Sysblog() {
   // const Blogs = [
@@ -92,46 +96,75 @@ function Sysblog() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch(
-      "https://zigirumugabe-pacifique.onrender.com/api/klab/blog/ViewAllBlogs"
-    )
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
-          setPosts(res.data);
-        }
-      });
+    const fetchData = async () => {
+      fetch(
+        "https://zigirumugabe-pacifique.onrender.com/api/klab/blog/ViewAllBlogs"
+      )
+        .then((response) => response.json())
+        .then((res) => {
+          setPosts(res);
+        });
+    };
+    fetchData();
   });
 
   return (
     <>
       <section id="navbar">
-        <Navbar />
+        <Admin_navbar />
       </section>
       <section id="content">
-        <div className="dash_container">
-          <div class="hero">
-            <h2>Welcome to Meight Blogs</h2>
-            <p>
-              Connect with us in this digital era and stick to the fore front
-              position globally with meight blogs
-            </p>
+        <div class="admin_hero">
+          <div className="dashboard_title">
+            {" "}
+            <h2>
+              <FiSettings />
+              Dashboard
+            </h2>
             <Link to="/Add_blog">
-              {" "}
-              <button className="button_hero">Add Blog</button>
+              <div className="add_post">
+                <button>
+                  <MdAddToPhotos />
+                  Add New POST
+                </button>
+              </div>
             </Link>
           </div>
 
-          <div className="blog_grid">
+          <div className="dashboard_buttons">
+            <div className="add_post">
+              <button>
+                All Blogs
+                {posts && <span class="pop">{posts.length}</span>}
+              </button>
+            </div>
+
+            <div className="add_post">
+              <button>
+                Blog Users
+                <span class="pop">7</span>
+              </button>
+            </div>
+
+            <div className="add_post">
+              <button>
+                Comments
+                <span class="pop">10</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="admin_dash_container">
+          <div className="admin_blog_grid">
             {posts.length > 0 ? (
               posts.map((blogs, index) => (
-                <Card_blogs
+                <Admin_card_blog
                   key={index}
+                  id={blogs._id}
                   title={blogs.blogTitle}
                   Description={blogs.blogContent}
                   image={blogs.blog_Image}
-                  edit={blogs.edit}
-                  trash={blogs.edit}
                 />
               ))
             ) : (

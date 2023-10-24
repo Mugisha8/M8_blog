@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { IconContext } from "react-icons";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
+import { GatewayModel } from "./GatewayModel";
 
-const Navbar = () => { 
+const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const [GatewayModelopen, setGatewayModelopen] = useState(false);
 
   return (
     <IconContext.Provider value={{ color: "white", size: "2em" }}>
@@ -32,10 +35,13 @@ const Navbar = () => {
             <Link to="/contact" className="text">
               Contact
             </Link>
+            <button
+              className="dash_signin"
+              onClick={() => setGatewayModelopen(true)}
+            >
+              SIGN IN
+            </button>
           </ul>
-          <Link to="/signin">
-            <button class="dash_signin">SIGN IN</button>
-          </Link>
 
           <div
             className="MobileMenu"
@@ -45,6 +51,12 @@ const Navbar = () => {
           >
             <FaBars />
           </div>
+        </div>
+
+        <div className="model">
+          {GatewayModelopen && (
+            <GatewayModel closeGatewayModel={setGatewayModelopen} />
+          )}
         </div>
       </>
     </IconContext.Provider>

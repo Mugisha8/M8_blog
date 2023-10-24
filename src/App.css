@@ -3,6 +3,7 @@
   padding: 0px;
   list-style: none;
   text-decoration: none;
+  box-sizing: border-box;
 }
 * h1,
 h2,
@@ -26,7 +27,8 @@ html {
 .menus ul {
   display: block;
   display: flex;
-  gap: 10px;
+
+  gap: 20px;
   font-size: 18px;
 }
 .menus h2 {
@@ -51,8 +53,16 @@ html {
 }
 
 .dash_container {
-  padding: 7% 10%;
+  padding: 7% 8%;
 }
+.admin_dash_container {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 40px;
+  padding-left: 10%;
+  padding-right: 5%;
+}
+
 .hero {
   background-color: #35b3a3;
   height: 250px;
@@ -64,6 +74,36 @@ html {
   justify-content: center;
   text-align: center;
 }
+.admin_hero {
+  background-color: #35b3a3;
+  height: 100px;
+  color: white;
+  margin-top: 6%;
+  padding-left: 1%;
+  padding-top: 1%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard_buttons {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 15px;
+  padding: 30px;
+}
+.dashboard_buttons button {
+  display: flex;
+  gap: 5px;
+}
+
+.pop {
+  background-color: black;
+  color: white;
+  padding: 3px;
+  border-radius: 27px;
+  gap: 10px;
+}
+
 .hero h2 {
   font-size: 26px;
 }
@@ -88,51 +128,44 @@ html {
   width: 100%;
   height: 20rem;
 }
-.card_photo:hover {
-  width: 100%;
-  height: 20rem;
-  background-color: #35b3a3;
-}
 
 .blog_grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  height: auto;
-  padding: 10px 0px;
+  gap: 20px;
+  padding: 10px;
+}
+.admin_blog_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 10px;
 }
 
 .card_blog {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: 100%;
-
-  background-color: white;
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
 }
 
-.image_overlay {
-  position: absolute;
-  width: 52.4vh;
-  height: 44vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(0, 0, 0, 0.6);
-  opacity: 0;
-  color: white;
+.readmore{
+  background-color: black;
+  color: whitesmoke;
+  border-radius: 0;
+  width: 100%;
 }
-.image_overlay:hover {
-  opacity: 1;
-  transition: 0.3s ease-in-out;
+.readmore:hover{
+  background-color:#35b3a3;
+  border: none;
+  outline: none;
+  color: whitesmoke;
+  border-radius: 0;
 }
-
 .card_blog h4 {
   text-align: center;
   color: black;
 }
-.card_blog p {
+.desc p {
   padding: 10px;
   color: rgb(72, 70, 70);
 }
@@ -169,129 +202,105 @@ form {
   background-color: #35b3a3;
 }
 
-.wrapper {
-  padding: 10% 0;
+/*---------- sign in ---------------------------------*/
+
+.Modelbackground {
+  background-color: rgba(30, 33, 33, 0.898);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
   display: flex;
-  width: 60rem;
-  margin-left: 18%;
-}
-.wrapper_login {
-  background-color: #35b3a3;
-  width: 90%;
-  height: 28rem;
+  justify-content: center;
   align-items: center;
-  box-shadow: 0px 2px 4px 1px rgb(0, 0, 0, 0.1);
 }
-.wrapper_login h2 {
-  color: white;
+.ModelContainer {
+  background-color: white;
+  box-shadow: 0px 0px 0px 4px rgb(0, 0, 0, 0.2);
+  width: 38%;
+  height: 73%;
+  border-radius: 5px;
+  border-bottom: 4px solid#35b3a3;
+}
+.ModelContainer h2 {
   text-align: center;
-  padding: 10% 0%;
 }
-.wrapper_login button {
-  background-color: black;
-  color: white;
+.ModelContainer h3 {
+  padding: 14px 0px;
+  text-align: center;
 }
-.wrapper_login span {
-  color: white;
-}
-.form_login {
+.form-login-model {
   display: flex;
   flex-direction: column;
-  padding: 10px 50px;
-  justify-content: center;
+  padding: 0px 30px;
+  margin: 45px 0px;
 }
-.form_login button {
-  width: 100%;
-}
-.form_login .login_text {
-  height: 1rem;
-  padding: 10px;
+.model-input-text {
+  padding: 14px;
   border-radius: 5px;
 }
-.wrapper_welcome {
-  background-color: black;
-  color: white;
-  width: 75%;
-  height: 23rem;
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  gap: 25px;
+.ModelContainer .cancel {
+  border-radius: 60px;
+  margin: 10px 10px;
 }
-.wrapper_welcome h2 {
-  text-align: center;
-}
-.wrapper_welcome button {
+.ModelContainer .login {
   background-color: #35b3a3;
-  color: white;
-  width: 60%;
-  margin-left: 20%;
+}
+.ModelContainer .login:hover {
+  background-color: black;
+  color: #fff;
+  border: none;
+  transition: 0.8s;
+}
+.facebook {
+  background-color: black;
+  border-radius: 15px;
+}
+.facebook:hover {
+  background-color: #35b3a3;
+  border-radius: 15px;
+}
+.instagram {
+  background-color: black;
+  border-radius: 10px;
+}
+.instagram:hover {
+  background-color: #35b3a3;
+  border-radius: 10px;
+}
+.twitter {
+  background-color: skyblue;
+  border-radius: 15px;
 }
 
-/*---------- sign up  ---------------------------------*/
+.twitter:hover {
+  background-color: skyblue;
+  border-radius: 15px;
+}
 
-.signup_wrapper {
-  padding: 10% 0;
+.socialnetworks {
   display: flex;
-  width: 60rem;
-  margin-left: 18%;
-}
-.wrapper_signup {
-  background-color: #35b3a3;
-  width: 90%;
-  height: 28rem;
-  align-items: center;
-  box-shadow: 0px 2px 4px 1px rgb(0, 0, 0, 0.1);
-}
-.wrapper_signup h2 {
-  color: white;
-  text-align: center;
-  padding: 8% 0%;
-}
-.wrapper_signup button {
-  background-color: black;
-  color: white;
-}
-.wrapper_signup span {
-  color: white;
-}
-.form_create {
-  display: flex;
-  flex-direction: column;
-  padding: 8px 55px;
+  gap: 20px;
   justify-content: center;
 }
-.form_create .signup_text {
-  height: 1rem;
-  padding: 10px;
-  border-radius: 4px;
-  outline: none;
+.create h3 {
+  padding: 30px;
+  font-size: 18px;
+  cursor: pointer;
 }
-.form_create .file_img {
-  padding: 10px 0;
+.create button {
+  background-color: none;
 }
-.wrapper_welcome {
-  background-color: black;
-  color: white;
-  width: 75%;
-  height: 23rem;
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  gap: 25px;
+.join {
+  color: #35b3a3;
 }
-.wrapper_welcome h2 {
-  text-align: center;
+.join:hover {
+  color: #101212;
 }
-.wrapper_welcome button {
-  background-color: #35b3a3;
-  color: white;
-  width: 60%;
-  margin-left: 20%;
+.file_img {
+  padding: 10px 0px;
 }
 
+/*--------------- About section ---------------------*/
 #about_content {
   padding: 6% 16%;
 }
@@ -355,7 +364,15 @@ form {
 #blog_content {
   padding: 6% 16%;
 }
+.desc p {
+  max-width: 100%;
+  word-break: break-all;
+}
+.cover-image-blog{
+  width: 100%;
+  height: 30rem;
 
+}
 .blog_desc h2 {
   text-align: center;
   padding: 15px 0;
@@ -487,13 +504,16 @@ form {
   gap: 10px;
   justify-content: center;
   cursor: pointer;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
 }
-.modification .edit {
+.modification .modification_edit {
   color: #35b3a3;
+  border-color: #35b3a3;
+  outline-color: #35b3a3;
 }
-.modification .delete {
-  color: red;
+.modification .modification_delete {
+  background-color: rgb(159, 7, 7);
+  color: white;
 }
 .profile_img {
   width: 3rem;
@@ -505,7 +525,58 @@ form {
   border: 3px dotted;
   width: 400px;
   height: 300px;
+  border-radius: 20px;
 }
+
+/*------------------edit model---------------------------*/
+
+.edit_blog_background {
+  background-color: rgba(0, 0, 0, 0.433);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  margin-left: -12%;
+  display: flex;
+  justify-content:space-evenly;
+  
+}
+.edit_blog_content {
+  background-color: white;
+  box-shadow: 0px 0px 0px 4px rgb(0, 0, 0, 0.2);
+  width: 38%;
+  height: 68%;
+  margin-bottom: 15%;
+  margin-right: -5%;
+  border-radius: 5px;
+
+}
+
+.form-edit-model {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 30px;
+  margin: 45px 0px;
+}
+.model-edit-text {
+  padding: 14px;
+  border-radius: 5px;
+}
+.model-edit-area {
+  padding: 84px;
+  border-radius: 5px;
+}
+.edit_blog_content .cancel {
+  border-radius: 60px;
+  margin: 10px 10px;
+}
+.form-edit-button {
+  background-color: #35b3a3;
+}
+.edit_blog_content h2 {
+  text-align: center;
+}
+
+/*------------------------Media Queries------------------------------*/
 
 @media screen and (max-width: 980px) {
   .blog_grid {
@@ -551,7 +622,21 @@ form {
     box-shadow: 0px 5px 8px 2px rgb(0, 0, 0, 0.2);
   }
 }
-
+@media screen and (max-width: 1200px) {
+  .ModelContainer {
+    background-color: white;
+    box-shadow: 0px 0px 0px 4px rgb(0, 0, 0, 0.2);
+    width: 48%;
+    height: 78%;
+    border-radius: 5px;
+    border-bottom: 4px solid#35b3a3;
+  }
+  .create h3 {
+    padding: 0px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+}
 @media screen and (max-width: 690px) {
   .menus {
     display: flex;
@@ -559,7 +644,7 @@ form {
   .menus ul {
     display: none;
     flex-direction: column;
-    margin-top: 20%;
+    margin-top: 10%;
   }
   .menus ul.open {
     display: flex;
@@ -569,6 +654,7 @@ form {
   }
   .dash_signin {
     display: block;
+    margin-left: -20px;
   }
   #mobile {
     padding-left: 20px;
@@ -592,26 +678,15 @@ form {
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 20px;
   }
+  .admin_blog_grid {
+    
+    grid-template-columns: repeat(2, 1fr);
+   
+  }
 
   .input_news {
     width: 360px;
     height: 2.8rem;
-  }
-
-  .wrapper {
-    display: grid;
-    margin-left: 6%;
-    width: 33rem;
-    margin-top: 7%;
-  }
-  .signup_wrapper {
-    display: grid;
-    margin-left: 6%;
-    width: 33rem;
-    margin-top: 7%;
-  }
-  .wrapper_welcome {
-    width: 27rem;
   }
 
   #content_blog {
@@ -623,6 +698,20 @@ form {
     grid-template-columns: auto;
     padding: 30px 0;
     box-shadow: 0px 5px 8px 2px rgb(0, 0, 0, 0.2);
+  }
+
+  .ModelContainer {
+    background-color: white;
+    box-shadow: 0px 0px 0px 4px rgb(0, 0, 0, 0.2);
+    width: 78%;
+    height: 75%;
+    border-radius: 5px;
+    border-bottom: 4px solid#35b3a3;
+  }
+  .create h3 {
+    padding: 20px;
+    font-size: 18px;
+    cursor: pointer;
   }
 }
 
@@ -648,5 +737,11 @@ form {
     border: none;
     outline-color: #35b3a3;
     border-bottom: 2px solid gray;
+  }
+  .admin_blog_grid {
+    
+    grid-template-columns: repeat(1, 1fr);
+    padding:20px  30px;
+   
   }
 }
