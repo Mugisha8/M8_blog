@@ -24,10 +24,6 @@ const Navbar = () => {
               Home
             </Link>
 
-            <Link to="/blogpost" className="text">
-              Blog Posts
-            </Link>
-
             <Link to="/About" className="text">
               About
             </Link>

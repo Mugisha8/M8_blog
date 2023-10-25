@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import CoverImage from "./components/CoverImage";
@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 function Blogpost() {
   const { _id } = useParams();
   const [blogData, setBlogData] = useState({});
+  const [relatedblogs, setrelatedblogs] = useState([]);
 
   useEffect(() => {
     const getAll = async () => {
@@ -21,31 +22,21 @@ function Blogpost() {
     };
 
     getAll();
-  }, []);
+  }, [_id]);
   console.log("POSTS", blogData);
 
-  if (!blogData) {
-    return <div>Loading..</div>;
-  }
-
-  const Blog_post = [
-    {
-      post: "https://images.unsplash.com/photo-1696841212541-449ca29397cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
-      Title: "Throwback to the Good Old Days",
-    },
-    {
-      post: "https://images.unsplash.com/photo-1696172686863-f47aac202464?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-      Title: "Throwback to the Good Old Days",
-    },
-    {
-      post: "https://images.unsplash.com/photo-1696254981060-e4c03b07a9a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0NHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-      Title: "Throwback to the Good Old Days",
-    },
-    {
-      post: "https://images.unsplash.com/photo-1696841212541-449ca29397cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
-      Title: "Throwback to the Good Old Days",
-    },
-  ];
+  useEffect(() => {
+    const Relatedpost = async () => {
+      await fetch(
+        `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/ViewAllBlogs`
+      )
+        .then((response) => response.json())
+        .then((res) => {
+          setrelatedblogs(res.data);
+        });
+    };
+    Relatedpost();
+  }, []);
 
   const Comment_post = [
     {
@@ -98,17 +89,21 @@ function Blogpost() {
         </div>
 
         <h3> Related Posts</h3>
-        <div class="related_post">
-          {Blog_post.map((related, index) => (
-            <CoverImage
-              key={index}
-              image={related.post}
-              title={related.Title}
-            />
+
+        <div className="related_post">
+          {relatedblogs.slice(0, 4).map((related, index) => (
+            <Link to={`/blog/${related._id}`} key={index}>
+              <CoverImage
+                key={index}
+                id={related._id}
+                image={related.blog_Image}
+                title={related.blogTitle}
+              />
+            </Link>
           ))}
         </div>
 
-        <div class="load">
+        <div className="load">
           <Link to="/">
             {" "}
             <button className="more">{" More>>> "}</button>
@@ -120,7 +115,7 @@ function Blogpost() {
           <hr />
         </div>
 
-        <div class="comments">
+        <div className="comments">
           {Comment_post.map((comment_element, index) => (
             <Comment
               key={index}
@@ -138,12 +133,6 @@ function Blogpost() {
 
         <div className="reply_post">
           <form method="POST" className="comment_form">
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              className="comment_text"
-            />
             <textarea
               placeholder="Leave your Comment"
               name="comment"

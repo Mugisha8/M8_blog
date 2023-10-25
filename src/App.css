@@ -103,6 +103,14 @@ html {
   border-radius: 27px;
   gap: 10px;
 }
+.pop_chart {
+  background-color: black;
+  color: whitesmoke;
+  font-weight: bold;
+  padding: 3px;
+  border-radius: 27px;
+  gap: 10px;
+}
 
 .hero h2 {
   font-size: 26px;
@@ -148,14 +156,14 @@ html {
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
 }
 
-.readmore{
+.readmore {
   background-color: black;
   color: whitesmoke;
   border-radius: 0;
   width: 100%;
 }
-.readmore:hover{
-  background-color:#35b3a3;
+.readmore:hover {
+  background-color: #35b3a3;
   border: none;
   outline: none;
   color: whitesmoke;
@@ -314,7 +322,7 @@ form {
 
 .imagecover {
   width: 100%;
-  height: 25rem;
+  height: 17rem;
 }
 
 #about_content h2 {
@@ -368,10 +376,9 @@ form {
   max-width: 100%;
   word-break: break-all;
 }
-.cover-image-blog{
+.cover-image-blog {
   width: 100%;
   height: 30rem;
-
 }
 .blog_desc h2 {
   text-align: center;
@@ -426,6 +433,7 @@ form {
 }
 .comment_text {
   height: 3.2rem;
+  padding: 15px;
   outline: none;
   border: none;
   border-bottom: 2px solid rgb(187, 185, 185);
@@ -443,14 +451,19 @@ form {
 }
 
 #content_blog {
-  padding: 9% 20%;
+  background-color: rgba(30, 33, 33, 0.898);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .addblog {
   display: grid;
   grid-template-columns: auto auto;
   padding: 35px 0;
-  box-shadow: 0px 5px 8px 2px rgb(0, 0, 0, 0.2);
 }
 .clear1 {
   background-color: #35b3a3;
@@ -481,6 +494,12 @@ form {
   border: none;
   outline-color: #35b3a3;
   border-bottom: 2px solid gray;
+}
+
+.wrapper_container {
+  background-color: white;
+  padding: 10px 30px;
+  border-radius: 5px;
 }
 
 .addblog span {
@@ -537,8 +556,7 @@ form {
   position: fixed;
   margin-left: -12%;
   display: flex;
-  justify-content:space-evenly;
-  
+  justify-content: space-evenly;
 }
 .edit_blog_content {
   background-color: white;
@@ -548,7 +566,6 @@ form {
   margin-bottom: 15%;
   margin-right: -5%;
   border-radius: 5px;
-
 }
 
 .form-edit-model {
@@ -573,6 +590,35 @@ form {
   background-color: #35b3a3;
 }
 .edit_blog_content h2 {
+  text-align: center;
+}
+
+.views_display {
+  color: black;
+  border-radius: 30px;
+  padding: 6px 12px;
+  background: none;
+}
+.dash_view{
+  display: flex;
+  justify-content: space-between;
+}
+.date_display {
+  color: rgb(77, 74, 74);
+  border-radius: 30px;
+  padding: 6px 12px;
+  background: none;
+}
+
+.modification .views {
+  background-color: rgba(0, 0, 0, 0.855);
+  color: white;
+  border: 3px solid white;
+}
+
+
+.cover_image h5{
+  color: black;
   text-align: center;
 }
 
@@ -679,9 +725,7 @@ form {
     grid-gap: 20px;
   }
   .admin_blog_grid {
-    
     grid-template-columns: repeat(2, 1fr);
-   
   }
 
   .input_news {
@@ -739,9 +783,7 @@ form {
     border-bottom: 2px solid gray;
   }
   .admin_blog_grid {
-    
     grid-template-columns: repeat(1, 1fr);
-    padding:20px  30px;
-   
+    padding: 20px 30px;
   }
 }

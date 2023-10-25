@@ -1,76 +1,107 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export const Editmodel = ({ closeeditmodel }) => {
-  // const [isEditing, setIsEditing] = useState(false);
-  // const [editedTitle, setEditedTitle] = useState(title);
-  // const [editedContent, setEditedContent] = useState(content);
-  // const [editedImage, setEditedImage] = useState(null);
+export const Editmodel = ({ closeEditModel, blogId }) => {
+  const [editedBlog, setEditedBlog] = useState({});
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageFile, setImageFile] = useState(null);
 
-  // function handleImageChange(event) {
-  //   const file = event.target.files[0];
-  //   setEditedImage(file);
-  // }
+  const token = localStorage.getItem("token");
+  console.log("Token =", token);
 
-  // function handleUpdate() {
-  //   const formData = new FormData();
-  //   formData.append("blogTitle", editedTitle);
-  //   formData.append("blogContent", editedContent);
+  const configuration = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
-  //   // Check if editedImage is not null before appending it to the formData
-  //   if (editedImage) {
-  //     formData.append("blog_Image", editedImage);
-  //   }
+  useEffect(() => {
+    // Fetch the specific blog post data from your API
+    axios
+      .get(
+        `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/ViewBlogById/${blogId}`
+      )
+      .then((response) => {
+        const blogData = response.data.data;
+        setEditedBlog(blogData);
+        setTitle(blogData.blogTitle);
+        setDescription(blogData.blogContent);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  }, [blogId]);
 
-  //   axios
-  //     .put(
-  //       `https://node-app-plsi.onrender.com/api/klab/blog/update/${id}`,
-  //       formData
-  //     )
-  //     .then(() => {
-  //       alert("Data updated successfully");
-  //       setIsEditing(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error updating data: ", error);
-  //       alert("Failed to update data");
-  //     });
-  // }
+  const handleSaveClick = () => {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+
+    // Send a PUT request to update the blog data
+    axios
+      .put(
+        `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/updateBlog/${blogId}`,
+        formData,
+        configuration
+      )
+      .then((response) => {
+        // Handle successful update
+        console.log("Blog updated successfully: ", response.data);
+        closeEditModel();
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("Error updating blog: ", error);
+      });
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImageFile(file);
+  };
 
   return (
-    <>
-      <div className="edit_blog_background">
-        <div className="edit_blog_content">
-          <button className="cancel" onClick={() => closeeditmodel(false)}>
-            X
-          </button>
-          <h2>
-            M<span className="logo">eight</span> Blogs
-          </h2>
-          <div className="content">
-            <form className="form-edit-model">
-              <input
-                type="text"
-                className="model-edit-text"
-                placeholder="Title"
-              />
+    <div className="edit_blog_background">
+      <div className="edit_blog_content">
+        <button className="cancel" onClick={() => closeEditModel(false)}>
+          X
+        </button>
+        <h2>
+          M<span className="logo">eight</span> Blogs
+        </h2>
+        <div className="content">
+          <form className="form-edit-model">
+            <input
+              type="text"
+              className="model-edit-text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
 
-              <textarea
-                className="model-edit-area"
-              
-              ></textarea>
+            <textarea
+              className="model-edit-area"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
 
-              <input
-                type="file"
-                className=""
-                accept="image/*" // Allow only image files
-              />
+            <input
+              type="file"
+              className=""
+              accept="image/*"
+              onChange={handleImageChange}
+            />
 
-              <button className="update">Update / Edit</button>
-            </form>
-          </div>
+            <button className="update" onClick={handleSaveClick}>
+              Update / Edit
+            </button>
+          </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };

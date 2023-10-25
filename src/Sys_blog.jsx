@@ -3,10 +3,12 @@ import Navbar from "./components/navbar";
 import Admin_navbar from "./components/Admin_navbar";
 import Card_blogs from "./components/Card_blogs";
 import Footer from "./components/footer";
-import { Link, json } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FiSettings } from "react-icons/Fi";
-import { MdAddToPhotos } from "react-icons/Md";
+import { AiOutlineBarChart } from "react-icons/ai";
+import { MdAddToPhotos } from "react-icons/md";
 import Admin_card_blog from "./components/admin_card_blog";
+import Add_blog from "./Add_blog";
 
 function Sysblog() {
   // const Blogs = [
@@ -93,6 +95,8 @@ function Sysblog() {
   //   },
   // ];
 
+  const [addblog, setaddblog] = useState(false);
+
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -102,7 +106,7 @@ function Sysblog() {
       )
         .then((response) => response.json())
         .then((res) => {
-          setPosts(res);
+          setPosts(res.data);
         });
     };
     fetchData();
@@ -112,6 +116,8 @@ function Sysblog() {
     <>
       <section id="navbar">
         <Admin_navbar />
+        {addblog && <Add_blog closeblog={setaddblog} />}
+
       </section>
       <section id="content">
         <div class="admin_hero">
@@ -121,14 +127,14 @@ function Sysblog() {
               <FiSettings />
               Dashboard
             </h2>
-            <Link to="/Add_blog">
+            
               <div className="add_post">
-                <button>
+                <button onClick={() => setaddblog(true)}>
                   <MdAddToPhotos />
                   Add New POST
                 </button>
               </div>
-            </Link>
+            
           </div>
 
           <div className="dashboard_buttons">
@@ -148,12 +154,15 @@ function Sysblog() {
 
             <div className="add_post">
               <button>
-                Comments
-                <span class="pop">10</span>
+                Analytics
+                <span class="pop_chart">
+                  <AiOutlineBarChart />
+                </span>
               </button>
             </div>
           </div>
         </div>
+
 
         <div className="admin_dash_container">
           <div className="admin_blog_grid">
@@ -165,6 +174,7 @@ function Sysblog() {
                   title={blogs.blogTitle}
                   Description={blogs.blogContent}
                   image={blogs.blog_Image}
+                  views={blogs.views}
                 />
               ))
             ) : (
@@ -192,6 +202,7 @@ function Sysblog() {
       <section id="footer">
         <Footer />
       </section>
+     
     </>
   );
 }

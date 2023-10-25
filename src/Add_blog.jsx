@@ -1,31 +1,18 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Admin_navbar from "./components/Admin_navbar";
 import Footer from "./components/footer";
 import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import JoditEditor from "jodit-react";
 import axios from "axios";
 
-const Add_blog = () => {
+const Add_blog = ({ closeblog }) => {
   const navigate = useNavigate();
+  const editor = useRef(null);
+  const [blogContent, setblogContent] = useState("");
 
   const [blogTitle, setblogTitle] = useState("");
-  const [blogContent, setblogContent] = useState("");
   const [blog_Image, setblog_Image] = useState("");
-
-  // const BlogData = {
-  //   blogTitle,
-  //   blogContent,
-  //   blog_Image,
-  // };
-
-  // const [imgfile, uploading] = useState("");
-
-  // const imgFilehandler = (e) => {
-  //   if (e.target.files.length !== 0) {
-  //     uploading(URL.createObjectURL(e.target.files[0]));
-  //   }
-  //   setblog_Image(e.target.value);
-  // };
 
   const token = localStorage.getItem("token");
   console.log("Token =", token);
@@ -58,6 +45,9 @@ const Add_blog = () => {
       if (make.status === 200) {
         alert("blog created successfuly");
         navigate("/Sys_blog");
+        setblogContent("");
+        setblogTitle("");
+        setblog_Image("");
       }
     } catch (error) {
       console.log(error);
@@ -73,9 +63,13 @@ const Add_blog = () => {
 
       <section id="content_blog">
         <div className="wrapper_container">
+          <button className="cancel" onClick={() => closeblog(false)}>
+            X
+          </button>
           <h2>
             M<span>eight</span> Blogs
           </h2>
+
           <form className="addblog">
             <b>
               <label>Title</label>
@@ -96,6 +90,12 @@ const Add_blog = () => {
               value={blogContent}
               onChange={(e) => setblogContent(e.target.value)}
             ></textarea>
+            {/* <JoditEditor
+              ref={editor}
+              value={blogContent}
+              onChange={(newblogContent) => setblogContent(newblogContent)}
+            /> */}
+
             <input
               type="file"
               value={blog_Image}
@@ -111,21 +111,14 @@ const Add_blog = () => {
                 height="300px"
               />
             </div> */}
-            <button className="cancel">Cancel</button>
+
             <button className="publish" onClick={handleblog}>
               Publish
             </button>
-
+            <button className="cancel">Cancel</button>
             <button className="clear">Clear</button>
-            <Link to="/Sys_blog ">
-              <span>{"View Your publsihed blogs >>>"}</span>
-            </Link>
           </form>
         </div>
-      </section>
-
-      <section id="footer">
-        <Footer />
       </section>
     </>
   );

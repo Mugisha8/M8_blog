@@ -1,10 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const CoverImage = ({ image, title }) => {
+const CoverImage = ({ id, image, title }) => {
   return (
     <div class="cover_image">
-      <img src={image} alt="" className="imagecover" />
-      <h5>{title}</h5>
+      <Link to={`/blogpost/${id}`}>
+        <img src={image} alt="" className="imagecover" />
+      </Link>
+
+      <h5 >{title}</h5>
     </div>
   );
 };

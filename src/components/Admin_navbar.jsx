@@ -13,25 +13,13 @@ const Admin_navbar = () => {
     <IconContext.Provider value={{ color: "white", size: "2em" }}>
       <>
         <div className="menus">
-          <Link to="/">
+          <Link to="/Sys_blog">
             {" "}
             <h2>
               M<span class="logo">eight</span> Blogs
             </h2>
           </Link>
           <ul className={menuOpen ? "open" : ""}>
-            <Link to="/Sys_blog" className="text">
-              Home
-            </Link>
-
-            <Link to="/Add_blog" className="text">
-              Add Blog
-            </Link>
-
-            <Link to="/About" className="text">
-              About
-            </Link>
-
             <button
               className="dash_signin"
               onClick={() => {

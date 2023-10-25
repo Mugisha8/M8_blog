@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Editmodel } from "./editmodel";
+import { LuView } from "react-icons/Lu";
 
-const Admin_card_blog = ({ id, title, Description, image }) => {
-  const [editopen, seteditopen] = useState(false);
+const Admin_card_blog = ({ id, title, Description, image, views }) => {
+  const [editOpen, setEditOpen] = useState(false);
 
-  function deleteRecord() {
+  const deleteRecord = () => {
     axios
       .delete(
         `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/DeleteBlog/${id}`
@@ -15,37 +16,41 @@ const Admin_card_blog = ({ id, title, Description, image }) => {
       })
       .catch((error) => {
         console.error("Error deleting data:", error);
-        alert("failed to delete data");
+        alert("Failed to delete data");
       });
-  }
+  };
 
   return (
-    
     <>
-      
-    <div className="card_blog">
-  
-      <div>
-        <img src={image} alt="" className="card_photo" />
-      </div>
+      <div className="card_blog">
+        <div>
+          <img src={image} alt="" className="card_photo" />
+        </div>
 
-      <h4>{title}</h4>
+        <h4>{title}</h4>
 
-      <div className="desc">
-        <p>{Description.substring(0,230)}</p>
-      </div>
+        <div className="desc">
+          <p>{Description.substring(0, 230)}</p>
+        </div>
 
-      <div className="modification">
-        <button class="modification_edit" onClick={() => seteditopen(true)}>
-          EDIT
-        </button>
-        <button class="modification_delete" onClick={deleteRecord}>
-          Delete
-        </button>
+        <div className="modification">
+          <button className="views">
+            <LuView /> Views: {views}
+          </button>
+          <button
+            className="modification_edit"
+            onClick={() => setEditOpen(true)}
+          >
+            EDIT
+          </button>
+          <button className="modification_delete" onClick={deleteRecord}>
+            Delete
+          </button>
+        </div>
       </div>
-      
-    </div>
-    {editopen && <Editmodel closeeditmodel={seteditopen} />}
+      {editOpen && (
+        <Editmodel closeEditModel={() => setEditOpen(false)} blogId={id} />
+      )}
     </>
   );
 };
