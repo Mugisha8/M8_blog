@@ -6,18 +6,17 @@ import { LuView } from "react-icons/Lu";
 const Admin_card_blog = ({ id, title, Description, image, views }) => {
   const [editOpen, setEditOpen] = useState(false);
 
-  const deleteRecord = () => {
-    axios
-      .delete(
-        `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/DeleteBlog/${id}`
-      )
-      .then(() => {
-        alert("Blog deleted successfully");
-      })
-      .catch((error) => {
-        console.error("Error deleting data:", error);
-        alert("Failed to delete data");
-      });
+  const deleteRecord = async () => {
+    const url = `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/DeleteBlog/${id}`;
+    console.log("Delete URL:", url);
+
+    try {
+      await axios.delete(url);
+      alert("Blog deleted successfully");
+    } catch (error) {
+      console.error("Error deleting data:", error);
+      alert("Failed to delete data");
+    }
   };
 
   return (

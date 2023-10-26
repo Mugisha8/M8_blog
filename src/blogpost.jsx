@@ -93,12 +93,14 @@ function Blogpost() {
         <div className="related_post">
           {relatedblogs.slice(0, 4).map((related, index) => (
             <Link to={`/blog/${related._id}`} key={index}>
+   
               <CoverImage
                 key={index}
                 id={related._id}
                 image={related.blog_Image}
                 title={related.blogTitle}
               />
+
             </Link>
           ))}
         </div>

@@ -579,9 +579,14 @@ form {
   border-radius: 5px;
 }
 .model-edit-area {
-  padding: 84px;
+  height: 11rem;
+  padding: 10px 15px;
   border-radius: 5px;
 }
+.model-update{
+background-color: #35b3a3;
+}
+
 .edit_blog_content .cancel {
   border-radius: 60px;
   margin: 10px 10px;

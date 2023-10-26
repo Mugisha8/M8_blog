@@ -8,7 +8,6 @@ export const Editmodel = ({ closeEditModel, blogId }) => {
   const [imageFile, setImageFile] = useState(null);
 
   const token = localStorage.getItem("token");
-  console.log("Token =", token);
 
   const configuration = {
     headers: {
@@ -96,7 +95,7 @@ export const Editmodel = ({ closeEditModel, blogId }) => {
               onChange={handleImageChange}
             />
 
-            <button className="update" onClick={handleSaveClick}>
+            <button className="model-update" onClick={handleSaveClick}>
               Update / Edit
             </button>
           </form>

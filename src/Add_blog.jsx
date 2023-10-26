@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Add_blog = ({ closeblog }) => {
   const navigate = useNavigate();
-  const editor = useRef(null);
+  // const editor = useRef(null);
   const [blogContent, setblogContent] = useState("");
 
   const [blogTitle, setblogTitle] = useState("");
@@ -99,8 +99,8 @@ const Add_blog = ({ closeblog }) => {
             <input
               type="file"
               value={blog_Image}
-              id="imageInput"
-              accept="image/*"
+                id="imageInput"
+                accept="image/*"
               onChange={(e) => setblog_Image(e.target.value)}
             />
             {/* <div className="preview">
