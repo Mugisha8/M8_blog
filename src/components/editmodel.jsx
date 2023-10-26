@@ -33,12 +33,16 @@ export const Editmodel = ({ closeEditModel, blogId }) => {
 
   const handleSaveClick = (e) => {
     e.preventDefault();
-
+    // const data = {
+    //   blogTitle: blogTitle,
+    //   blogContent: blogContent,
+    //   blogImage: blog_Image,
+    // };
     const updData = new FormData();
-    updData.append("title", blogTitle);
-    updData.append("description", blogContent);
+    updData.append("blogTitle", blogTitle);
+    updData.append("blogContent", blogContent);
     if (blog_Image) {
-      updData.append("image", blog_Image);
+      updData.append("blog_Image", blog_Image);
     }
 
     // Send a PUT request to update the blog data
@@ -46,6 +50,7 @@ export const Editmodel = ({ closeEditModel, blogId }) => {
       .put(
         `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/updateBlog/${blogId}`,
         updData,
+
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -53,22 +58,14 @@ export const Editmodel = ({ closeEditModel, blogId }) => {
         }
       )
       .then((response) => {
-        if (
-          response.status === 200 &&
-          response.data &&
-          response.data.message === "Update successful"
-        ) {
-          alert("Blog successfully updated");
-          console.log(response.data.message);
-          closeEditModel();
-        } else {
-          alert("Update failed, please check your data and try again");
-        }
+        // Handle successful update
+        alert(response.data.message);
+        console.log(response.data.message);
+        closeEditModel();
       })
       .catch((error) => {
         // Handle error
         console.error("Error updating blog: ", error);
-        alert("An error occurred while updating the blog");
       });
   };
 
