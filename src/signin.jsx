@@ -26,14 +26,19 @@ function Signin() {
         console.log("response", data);
         localStorage.setItem("token", data.token);
         alert("Sign IN successfully");
-
+        if (data.role == "admin") {
+          window.location = "./Sys_blog";
+        } else {
+          window.location = "./blogpost";
+        }
         setEmail("");
         setPassword("");
-
-        history.push("/dashboard");
       } else {
         console.log("failed to login");
         alert("failed to login");
+
+        setEmail("");
+        setPassword("");
       }
     } catch (error) {
       console.log("error", error);

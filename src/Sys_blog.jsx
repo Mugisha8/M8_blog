@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/navbar";
+import Admin_navbar from "./components/Admin_navbar";
 import Card_blogs from "./components/Card_blogs";
 import Footer from "./components/footer";
-import { Link, json } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { FiSettings } from "react-icons/Fi";
+import { AiOutlineBarChart } from "react-icons/ai";
+import { MdAddToPhotos } from "react-icons/md";
+import Admin_card_blog from "./components/admin_card_blog";
+import Add_blog from "./Add_blog";
 
 function Sysblog() {
   // const Blogs = [
@@ -89,49 +95,86 @@ function Sysblog() {
   //   },
   // ];
 
+  const [addblog, setaddblog] = useState(false);
+
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch(
-      "https://zigirumugabe-pacifique.onrender.com/api/klab/blog/ViewAllBlogs"
-    )
-      .then((response) => response.json())
-      .then((res) => {
-        if (res.data) {
+    const fetchData = async () => {
+      fetch(
+        "https://zigirumugabe-pacifique.onrender.com/api/klab/blog/ViewAllBlogs"
+      )
+        .then((response) => response.json())
+        .then((res) => {
           setPosts(res.data);
-        }
-      });
+        });
+    };
+    fetchData();
   });
 
   return (
     <>
       <section id="navbar">
-        <Navbar />
+        <Admin_navbar />
+        {addblog && <Add_blog closeblog={setaddblog} />}
+
       </section>
       <section id="content">
-        <div className="dash_container">
-          <div class="hero">
-            <h2>Welcome to Meight Blogs</h2>
-            <p>
-              Connect with us in this digital era and stick to the fore front
-              position globally with meight blogs
-            </p>
-            <Link to="/Add_blog">
-              {" "}
-              <button className="button_hero">Add Blog</button>
-            </Link>
+        <div class="admin_hero">
+          <div className="dashboard_title">
+            {" "}
+            <h2>
+              <FiSettings />
+              Dashboard
+            </h2>
+            
+              <div className="add_post">
+                <button onClick={() => setaddblog(true)}>
+                  <MdAddToPhotos />
+                  Add New POST
+                </button>
+              </div>
+            
           </div>
 
-          <div className="blog_grid">
+          <div className="dashboard_buttons">
+            <div className="add_post">
+              <button>
+                All Blogs
+                {posts && <span class="pop">{posts.length}</span>}
+              </button>
+            </div>
+
+            <div className="add_post">
+              <button>
+                Blog Users
+                <span class="pop">7</span>
+              </button>
+            </div>
+
+            <div className="add_post">
+              <button>
+                Analytics
+                <span class="pop_chart">
+                  <AiOutlineBarChart />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+        <div className="admin_dash_container">
+          <div className="admin_blog_grid">
             {posts.length > 0 ? (
               posts.map((blogs, index) => (
-                <Card_blogs
+                <Admin_card_blog
                   key={index}
+                  id={blogs._id}
                   title={blogs.blogTitle}
                   Description={blogs.blogContent}
                   image={blogs.blog_Image}
-                  edit={blogs.edit}
-                  trash={blogs.edit}
+                  views={blogs.views}
                 />
               ))
             ) : (
@@ -159,6 +202,7 @@ function Sysblog() {
       <section id="footer">
         <Footer />
       </section>
+     
     </>
   );
 }

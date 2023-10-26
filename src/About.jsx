@@ -83,7 +83,7 @@ function About() {
             </p>
           </div>
           <div class="about_card">
-            <h3>Our Core values</h3>
+            <h3>Our Goals</h3>
             <p>
               {" "}
               We believe that everyone has a story to tell, knowledge to share,

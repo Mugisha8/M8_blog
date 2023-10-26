@@ -1,36 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import CoverImage from "./components/CoverImage";
 import { Link } from "react-router-dom";
 import Comment from "./components/Comment";
+import { useParams } from "react-router-dom";
 
 function Blogpost() {
-  const Blog_cover = [
-    {
-      photo:
-        "https://plus.unsplash.com/premium_photo-1675690280450-a544f470d42f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
-    },
-  ];
+  const { _id } = useParams();
+  const [blogData, setBlogData] = useState({});
+  const [relatedblogs, setrelatedblogs] = useState([]);
 
-  const Blog_post = [
-    {
-      post: "https://images.unsplash.com/photo-1696841212541-449ca29397cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
-      Title: "Throwback to the Good Old Days",
-    },
-    {
-      post:"https://images.unsplash.com/photo-1696172686863-f47aac202464?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-      Title: "Throwback to the Good Old Days",
-    },
-    {
-      post: "https://images.unsplash.com/photo-1696254981060-e4c03b07a9a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0NHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-      Title: "Throwback to the Good Old Days",
-    },
-    {
-      post: "https://images.unsplash.com/photo-1696841212541-449ca29397cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
-      Title: "Throwback to the Good Old Days",
-    },
-  ];
+  useEffect(() => {
+    const getAll = async () => {
+      const response = await fetch(
+        `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/ViewBlogById/${_id}`
+      );
+      const res = await response.json();
+      setBlogData(res.data);
+      console.log(res.data);
+    };
+
+    getAll();
+  }, [_id]);
+  console.log("POSTS", blogData);
+
+  useEffect(() => {
+    const Relatedpost = async () => {
+      await fetch(
+        `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/ViewAllBlogs`
+      )
+        .then((response) => response.json())
+        .then((res) => {
+          setrelatedblogs(res.data);
+        });
+    };
+    Relatedpost();
+  }, []);
 
   const Comment_post = [
     {
@@ -75,53 +81,29 @@ function Blogpost() {
 
       <section id="blog_content">
         <div className="coverblog">
-          {Blog_cover.map((blogg, index) => (
-            <CoverImage key={index} image={blogg.photo} />
-          ))}
+          <img src={blogData.blog_Image} className="cover-image-blog" alt="" />
         </div>
         <div className="blog_desc">
-          <h2>Embracing the Wild: Celebrating the Beauty of Nature</h2>
-          <p>
-            "Embracing the Wild: Step into the heart of nature with our blog,
-            where the wonders of the great outdoors come to life. Journey with
-            us through lush forests, across rolling meadows, and along serene
-            riversides. We celebrate the awe-inspiring beauty of the natural
-            world, from breathtaking landscapes to the smallest wonders of flora
-            and fauna. Join our community of nature enthusiasts, eco-advocates,
-            and adventure seekers as we explore the intricate ecosystems,
-            conservation efforts, and the profound serenity that nature offers.
-            Through vivid storytelling, breathtaking photography, and insightful
-            articles, we invite you to reconnect with the Earth, learn about its
-            intricate ecosystems, and find inspiration in the untouched marvels
-            of our planet. Let's embark on a journey where the rustle of leaves
-            and the song of birds remind us of the profound magic that lies just
-            beyond our doorstep.
-          </p>
-          <br />
-          <p>
-            Join our community of nature enthusiasts, eco-advocates, and
-            adventure seekers as we explore the intricate ecosystems,
-            conservation efforts, and the profound serenity that nature offers.
-            Through vivid storytelling, breathtaking photography, and insightful
-            articles, we invite you to reconnect with the Earth, learn about its
-            intricate ecosystems, and find inspiration in the untouched marvels
-            of our planet. Let's embark on a journey where the rustle of leaves
-            and the song of birds remind us of the profound magic that lies just
-            beyond our doorstep."
-          </p>
+          <h2>{blogData.blogTitle}</h2>
+          <p>{blogData.blogContent}</p>
         </div>
+
         <h3> Related Posts</h3>
-        <div class="related_post">
-          {Blog_post.map((related, index) => (
-            <CoverImage
-              key={index}
-              image={related.post}
-              title={related.Title}
-            />
+
+        <div className="related_post">
+          {relatedblogs.slice(0, 4).map((related, index) => (
+            <Link to={`/blog/${related._id}`} key={index}>
+              <CoverImage
+                key={index}
+                id={related._id}
+                image={related.blog_Image}
+                title={related.blogTitle}
+              />
+            </Link>
           ))}
         </div>
 
-        <div class="load">
+        <div className="load">
           <Link to="/">
             {" "}
             <button className="more">{" More>>> "}</button>
@@ -133,7 +115,7 @@ function Blogpost() {
           <hr />
         </div>
 
-        <div class="comments">
+        <div className="comments">
           {Comment_post.map((comment_element, index) => (
             <Comment
               key={index}
@@ -151,12 +133,14 @@ function Blogpost() {
 
         <div className="reply_post">
           <form method="POST" className="comment_form">
-            <input type="text" name="name" placeholder="Name" className="comment_text"/>
-            <textarea placeholder="Leave your Comment" name="comment"className="comment_text"></textarea>
+            <textarea
+              placeholder="Leave your Comment"
+              name="comment"
+              className="comment_text"
+            ></textarea>
             <button className="post_comment">POST COMMENT</button>
           </form>
         </div>
-
       </section>
       <section id="footer">
         <Footer />
