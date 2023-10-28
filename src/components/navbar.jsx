@@ -18,7 +18,7 @@ const Navbar = () => {
   const handleLogout = () => {
     setloggedIn(false);
     setLogout(true);
-    sessionStorage.clear();
+    localStorage.removeItem("token");
   };
 
   return (

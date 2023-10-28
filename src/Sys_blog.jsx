@@ -4,9 +4,9 @@ import Admin_navbar from "./components/Admin_navbar";
 
 import Footer from "./components/footer";
 
-import { FiSettings } from "react-icons/Fi";
+import { FiMoreVertical, FiSettings } from "react-icons/Fi";
 import { AiOutlineBarChart } from "react-icons/ai";
-import { MdAddToPhotos } from "react-icons/md";
+import { MdAddToPhotos, MdArrowDropDown } from "react-icons/md";
 import Admin_card_blog from "./components/admin_card_blog";
 import Add_blog from "./Add_blog";
 
@@ -14,6 +14,8 @@ function Sysblog() {
   const [addblog, setaddblog] = useState(false);
 
   const [posts, setPosts] = useState([]);
+
+  const [mobilePop, setmobilePop] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,8 +51,16 @@ function Sysblog() {
               </button>
             </div>
           </div>
+          <div className="mobile_pop_display">
+            <span
+              className="mobile_poptext_display"
+              onClick={() => setmobilePop(!mobilePop)}
+            >
+              <label>Other</label> <MdArrowDropDown />
+            </span>
+          </div>
 
-          <div className="dashboard_buttons">
+          <div className="dashboard_buttons" id={mobilePop ? "pop-open" : ""}>
             <div className="add_post">
               <button>
                 All Blogs

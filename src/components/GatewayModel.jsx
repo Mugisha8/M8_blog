@@ -94,6 +94,7 @@ export const GatewayModel = ({ closeGatewayModel, onSuccessfulLogin }) => {
         const responseData = await responses.json();
         console.log("response", responseData);
         localStorage.setItem("token", responseData.token);
+        sessionStorage.setItem("email", responseData.users.email);
         alert("Logged In successfully");
         console.log(responseData?.users?.role);
         if (responseData?.users?.role === "admin") {
