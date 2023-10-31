@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Add_blog = ({ closeblog }) => {
   const navigate = useNavigate();
-  const editor = useRef(null);
+  // const editor = useRef(null);
   const [blogContent, setblogContent] = useState("");
 
   const [blogTitle, setblogTitle] = useState("");
@@ -48,6 +48,7 @@ const Add_blog = ({ closeblog }) => {
         setblogContent("");
         setblogTitle("");
         setblog_Image("");
+        closeblog(false);
       }
     } catch (error) {
       console.log(error);

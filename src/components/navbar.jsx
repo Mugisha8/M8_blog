@@ -6,8 +6,20 @@ import { GatewayModel } from "./GatewayModel";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
   const [GatewayModelopen, setGatewayModelopen] = useState(false);
+
+  const [loggedIn, setloggedIn] = useState(false);
+  const [logout, setLogout] = useState(false);
+
+  const handleSuccessLogin = () => {
+    setloggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setloggedIn(false);
+    setLogout(true);
+    localStorage.removeItem("token");
+  };
 
   return (
     <IconContext.Provider value={{ color: "white", size: "2em" }}>
@@ -33,9 +45,15 @@ const Navbar = () => {
             </Link>
             <button
               className="dash_signin"
-              onClick={() => setGatewayModelopen(true)}
+              onClick={() => {
+                if (loggedIn) {
+                  handleLogout();
+                } else {
+                  setGatewayModelopen(true);
+                }
+              }}
             >
-              SIGN IN
+              {logout ? "SIGN IN" : loggedIn ? "Logout" : "SIGN IN"}
             </button>
           </ul>
 
@@ -51,7 +69,10 @@ const Navbar = () => {
 
         <div className="model">
           {GatewayModelopen && (
-            <GatewayModel closeGatewayModel={setGatewayModelopen} />
+            <GatewayModel
+              closeGatewayModel={setGatewayModelopen}
+              onSuccessfulLogin={handleSuccessLogin}
+            />
           )}
         </div>
       </>

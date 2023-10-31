@@ -101,7 +101,7 @@ html {
   color: white;
   padding: 3px;
   border-radius: 27px;
-  gap: 10px;
+  gap: 30px;
 }
 .pop_chart {
   background-color: black;
@@ -579,9 +579,20 @@ form {
   border-radius: 5px;
 }
 .model-edit-area {
-  padding: 84px;
+  height: 11rem;
+  padding: 10px 15px;
   border-radius: 5px;
 }
+.model-update {
+  background-color: #35b3a3;
+}
+
+.comment_heading {
+  display: flex;
+
+  gap: 10px;
+}
+
 .edit_blog_content .cancel {
   border-radius: 60px;
   margin: 10px 10px;
@@ -599,7 +610,7 @@ form {
   padding: 6px 12px;
   background: none;
 }
-.dash_view{
+.dash_view {
   display: flex;
   justify-content: space-between;
 }
@@ -616,11 +627,36 @@ form {
   border: 3px solid white;
 }
 
-
-.cover_image h5{
+.cover_image h5 {
   color: black;
   text-align: center;
 }
+
+.mobile_pop_display {
+  display: none;
+}
+
+/*-----------------charts styling start---------------------*/
+
+.analytics_model_background {
+  background-color: #0a0a0acf;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+}
+.analytics_model_container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 50px 10px;
+  margin: 25px 0px;
+}
+.charts {
+  padding: 25px 20px;
+  background-color: white;
+}
+
+/*-----------------charts styling start---------------------*/
 
 /*------------------------Media Queries------------------------------*/
 
@@ -724,8 +760,9 @@ form {
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 20px;
   }
+
   .admin_blog_grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: auto auto;
   }
 
   .input_news {
@@ -757,6 +794,41 @@ form {
     font-size: 18px;
     cursor: pointer;
   }
+
+  .dash_container .hero {
+    margin-top: 40px;
+  }
+
+  .dashboard_buttons {
+    grid-template-columns: auto;
+    z-index: 2;
+    display: none;
+  }
+
+  .mobile_pop_display {
+    display: flex;
+  }
+  .mobile_poptext_display {
+    cursor: pointer;
+    padding: 10px;
+  }
+  #pop-open {
+    display: grid;
+    padding: 0 10px;
+  }
+  .admin_hero {
+    padding-top: 20px;
+    margin-top: 10%;
+  }
+  .analytics_model_container {
+    grid-template-columns: auto;
+  }
+
+  .analytics_model_background {
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #0fb4eb;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -783,7 +855,6 @@ form {
     border-bottom: 2px solid gray;
   }
   .admin_blog_grid {
-    grid-template-columns: repeat(1, 1fr);
-    padding: 20px 30px;
+    grid-template-columns: auto;
   }
 }

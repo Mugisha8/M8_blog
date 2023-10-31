@@ -2,29 +2,27 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export const Editmodel = ({ closeEditModel, blogId }) => {
-  const [editedBlog, setEditedBlog] = useState({});
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [imageFile, setImageFile] = useState(null);
+  const [blogTitle, setTitle] = useState("");
+  const [blogContent, setDescription] = useState("");
+  const [blog_Image, setImageFile] = useState(null);
+  const [editedBlog, setEditedBlog] = useState(null);
 
   const token = localStorage.getItem("token");
-  console.log("Token =", token);
 
-  const configuration = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
+  if (!token) {
+    alert("You need to log in first");
+    return;
+  }
 
   useEffect(() => {
-    // Fetch the specific blog post data from your API
     axios
       .get(
         `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/ViewBlogById/${blogId}`
       )
       .then((response) => {
         const blogData = response.data.data;
-        setEditedBlog(blogData);
+        console.log("Fetched Blog Data:", blogData);
+        setEditedBlog(blogData); // Store the existing blog data
         setTitle(blogData.blogTitle);
         setDescription(blogData.blogContent);
       })
@@ -33,24 +31,36 @@ export const Editmodel = ({ closeEditModel, blogId }) => {
       });
   }, [blogId]);
 
-  const handleSaveClick = () => {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    if (imageFile) {
-      formData.append("image", imageFile);
+  const handleSaveClick = (e) => {
+    e.preventDefault();
+    // const data = {
+    //   blogTitle: blogTitle,
+    //   blogContent: blogContent,
+    //   blogImage: blog_Image,
+    // };
+    const updData = new FormData();
+    updData.append("blogTitle", blogTitle);
+    updData.append("blogContent", blogContent);
+    if (blog_Image) {
+      updData.append("blog_Image", blog_Image);
     }
 
     // Send a PUT request to update the blog data
     axios
       .put(
         `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/updateBlog/${blogId}`,
-        formData,
-        configuration
+        updData,
+
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       )
       .then((response) => {
         // Handle successful update
-        console.log("Blog updated successfully: ", response.data);
+        alert(response.data.message);
+        console.log(response.data.message);
         closeEditModel();
       })
       .catch((error) => {
@@ -79,13 +89,13 @@ export const Editmodel = ({ closeEditModel, blogId }) => {
               type="text"
               className="model-edit-text"
               placeholder="Title"
-              value={title}
+              value={blogTitle}
               onChange={(e) => setTitle(e.target.value)}
             />
 
             <textarea
               className="model-edit-area"
-              value={description}
+              value={blogContent}
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
 
@@ -96,7 +106,10 @@ export const Editmodel = ({ closeEditModel, blogId }) => {
               onChange={handleImageChange}
             />
 
-            <button className="update" onClick={handleSaveClick}>
+            <button
+              className="model-update"
+              onClick={(e) => handleSaveClick(e)}
+            >
               Update / Edit
             </button>
           </form>

@@ -2,37 +2,49 @@ import React, { useState } from "react";
 import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-export const GatewayModel = ({ closeGatewayModel }) => {
+export const GatewayModel = ({ closeGatewayModel, onSuccessfulLogin }) => {
   const navigate = useNavigate();
   const [NewaccountActive, setNewaccountActive] = useState(false);
   const [loginFormActive, setloginFormActive] = useState(true);
 
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
-  // const [profile, setProfile] = useState([]);
+  const [profile, setProfile] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const logininfo = { email, password };
 
-  const signupinfo = { firstname, lastname, email, password };
+  // const signupinfo = { firstname, lastname, email, password };
 
   {
     /*--------------  Signup -------------------------*/
   }
 
-  const handlesignup = async (signupData) => {
+  const handlesignup = async (e) => {
+    e.preventDefault();
+
+    const signupinfo = new FormData();
+    signupinfo.append("firstname", firstname);
+    signupinfo.append("lastname", lastname);
+    signupinfo.append("email", email);
+    signupinfo.append("password", password);
+
+    const imageInput = document.getElementById("imageInput");
+    const profile = imageInput.files[0];
+    signupinfo.append("profile", profile);
+
     try {
       const response = await fetch(
         "https://zigirumugabe-pacifique.onrender.com/api/Klab/user/signup",
+
         {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(signupData),
+          method: "POST", // Ensure it's a POST request
+          body: signupinfo,
         }
       );
-
-      if (response.ok) {
+      console.log(response);
+      if (response.status === 200 || response.status === 201) {
         const responseData = await response.json();
         console.log("response", responseData);
         alert("USER registered succesfully");
@@ -40,9 +52,18 @@ export const GatewayModel = ({ closeGatewayModel }) => {
         setlastname("");
         setEmail("");
         setPassword("");
-        // setProfile([]);
+        setProfile("");
+      } else if (response.status === 500) {
+        console.log("Email already exists");
+        alert("Email Already exists");
+        setfirstname("");
+        setlastname("");
+        setEmail("");
+        setPassword("");
+        setProfile("");
       } else {
         console.log("Failed to register your INFO");
+        alert("Failed to register your INFO");
         setfirstname("");
         setlastname("");
         setEmail("");
@@ -73,6 +94,7 @@ export const GatewayModel = ({ closeGatewayModel }) => {
         const responseData = await responses.json();
         console.log("response", responseData);
         localStorage.setItem("token", responseData.token);
+        sessionStorage.setItem("email", responseData.users.email);
         alert("Logged In successfully");
         console.log(responseData?.users?.role);
         if (responseData?.users?.role === "admin") {
@@ -80,10 +102,12 @@ export const GatewayModel = ({ closeGatewayModel }) => {
           navigate("/Sys_blog");
         } else {
           // window.location = "./blogpost";
-          navigate("/blogpost");
+          navigate("/");
         }
         setEmail("");
         setPassword("");
+        onSuccessfulLogin();
+        closeGatewayModel(false);
       } else {
         console.log("Failed to login");
         alert("Ooops, failed to login");
@@ -186,18 +210,17 @@ export const GatewayModel = ({ closeGatewayModel }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              {/* <input
+              <input
                 type="file"
+                id="imageInput"
+                accept="image/*"
                 className="file_img"
-                onChange={(e) => setProfile(e.target.files)}
-              /> */}
-              <button
-                className="login"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handlesignup(signupinfo);
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  setProfile(file);
                 }}
-              >
+              />
+              <button className="login" onClick={handlesignup}>
                 Create An account
               </button>
               <div className="create">

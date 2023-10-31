@@ -23,8 +23,8 @@ const Admin_navbar = () => {
             <button
               className="dash_signin"
               onClick={() => {
+                localStorage.removeItem("token");
                 window.location = "/";
-                sessionStorage.clear();
                 alert("You are logged out in the system");
               }}
             >

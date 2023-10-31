@@ -5,25 +5,30 @@ import CoverImage from "./components/CoverImage";
 import { Link } from "react-router-dom";
 import Comment from "./components/Comment";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function Blogpost() {
   const { _id } = useParams();
   const [blogData, setBlogData] = useState({});
   const [relatedblogs, setrelatedblogs] = useState([]);
+  const [postcomment, setpostcomment] = useState("");
+  console.log("postcomment", postcomment);
 
+  const displayAll = async () => {
+    const response = await fetch(
+      `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/ViewBlogById/${_id}`
+    );
+    const res = await response.json();
+    setBlogData(res.data);
+    console.log(res.data);
+  };
   useEffect(() => {
-    const getAll = async () => {
-      const response = await fetch(
-        `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/ViewBlogById/${_id}`
-      );
-      const res = await response.json();
-      setBlogData(res.data);
-      console.log(res.data);
-    };
-
-    getAll();
+    displayAll();
   }, [_id]);
   console.log("POSTS", blogData);
+  let comment_view = blogData.comment;
+
+  console.log("comment_view: ", comment_view);
 
   useEffect(() => {
     const Relatedpost = async () => {
@@ -38,41 +43,54 @@ function Blogpost() {
     Relatedpost();
   }, []);
 
-  const Comment_post = [
-    {
-      profile:
-        "https://images.unsplash.com/photo-1696841212541-449ca29397cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
-      username: "Yves MUGISHA",
-      comment:
-        "We celebrate the awe-inspiring beauty of the naturalworld, from breathtaking landscapes to the smallest wonders of floraand fauna",
-      date: "22/02/2023",
-    },
-    {
-      profile:
-        "https://images.unsplash.com/photo-1696841212541-449ca29397cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
-      username: "Keylah ISIMBI",
-      comment:
-        "We celebrate the awe-inspiring beauty of the naturalworld, from breathtaking landscapes to the smallest wonders of floraand fauna",
-      date: "12/06/2023",
-    },
-    {
-      profile:
-        "https://images.unsplash.com/photo-1696841212541-449ca29397cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
-      username: "Jayden ISHIMWE",
-      comment:
-        "We celebrate the awe-inspiring beauty of the naturalworld, from breathtaking landscapes to the smallest wonders of floraand fauna",
-      date: "02/12/2023",
-    },
-    {
-      profile:
-        "https://images.unsplash.com/photo-1696841212541-449ca29397cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60",
-      username: "Darren MUGABO",
-      comment:
-        "We celebrate the awe-inspiring beauty of the naturalworld, from breathtaking landscapes to the smallest wonders of floraand fauna",
-      date: "22/02/2023",
-    },
-  ];
+  {
+    /*---------- comment api section start --------- */
+  }
 
+  const postdata = {
+    message: postcomment,
+  };
+
+  const handleCommentPost = async (e) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem("token");
+    // console.log("token", token);
+
+    if (!token) {
+      alert("First Login to post your comment");
+    }
+
+    try {
+      const response = await axios.post(
+        `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/comment/${_id}`,
+        postdata,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("postdata", postdata);
+
+      if (response.status === 201) {
+        alert("comment Posted");
+        console.log(response.data);
+        setpostcomment("");
+        displayAll();
+      } else {
+        alert("comment post failed");
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log("error", error);
+      alert("an error occured while posting");
+    }
+  };
+
+  {
+    /*---------- comment api section end --------- */
+  }
   return (
     <>
       <section id="blog_navbar">
@@ -110,21 +128,26 @@ function Blogpost() {
           </Link>
         </div>
 
+        {/*---------- comment DOM section start --------- */}
+
         <div className="comment_heading">
-          <h4>Comments </h4>
-          <hr />
+          <span className="pop"></span>
+          {comment_view && comment_view.length} <h4>Comments </h4>
         </div>
+        <hr />
+        <br />
 
         <div className="comments">
-          {Comment_post.map((comment_element, index) => (
-            <Comment
-              key={index}
-              profile={comment_element.profile}
-              username={comment_element.username}
-              comment_desc={comment_element.comment}
-              date={comment_element.date}
-            />
-          ))}
+          {comment_view &&
+            comment_view.map((comment_element, index) => (
+              <section id="comments" key={index}>
+                <img src={comment_element.userPhoto} className="profile_img" />
+                <b>
+                  <span className="username">{comment_element.username}</span>
+                </b>
+                <p>{comment_element.message}</p>
+              </section>
+            ))}
         </div>
 
         <div className="reply_heading">
@@ -132,16 +155,23 @@ function Blogpost() {
         </div>
 
         <div className="reply_post">
-          <form method="POST" className="comment_form">
+          <form className="comment_form">
             <textarea
               placeholder="Leave your Comment"
               name="comment"
               className="comment_text"
+              value={postcomment}
+              onChange={(e) => setpostcomment(e.target.value)}
             ></textarea>
-            <button className="post_comment">POST COMMENT</button>
+            <button className="post_comment" onClick={handleCommentPost}>
+              POST COMMENT
+            </button>
           </form>
         </div>
       </section>
+
+      {/*---------- comment DOM section end --------- */}
+
       <section id="footer">
         <Footer />
       </section>

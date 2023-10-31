@@ -7,9 +7,21 @@ const Admin_card_blog = ({ id, title, Description, image, views }) => {
   const [editOpen, setEditOpen] = useState(false);
 
   const deleteRecord = () => {
+    const token = localStorage.getItem("token"); 
+
+    if (!token) {
+      alert("You need to log in first");
+      return;
+    }
+
     axios
       .delete(
-        `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/DeleteBlog/${id}`
+        `https://zigirumugabe-pacifique.onrender.com/api/klab/blog/DeleteBlog/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       )
       .then(() => {
         alert("Blog deleted successfully");
