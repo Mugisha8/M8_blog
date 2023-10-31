@@ -48,6 +48,7 @@ const Add_blog = ({ closeblog }) => {
         setblogContent("");
         setblogTitle("");
         setblog_Image("");
+        closeblog(false);
       }
     } catch (error) {
       console.log(error);
@@ -99,8 +100,8 @@ const Add_blog = ({ closeblog }) => {
             <input
               type="file"
               value={blog_Image}
-                id="imageInput"
-                accept="image/*"
+              id="imageInput"
+              accept="image/*"
               onChange={(e) => setblog_Image(e.target.value)}
             />
             {/* <div className="preview">

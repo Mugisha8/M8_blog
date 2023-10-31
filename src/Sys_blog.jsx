@@ -6,9 +6,10 @@ import Footer from "./components/footer";
 
 import { FiMoreVertical, FiSettings } from "react-icons/Fi";
 import { AiOutlineBarChart } from "react-icons/ai";
-import { MdAddToPhotos, MdArrowDropDown } from "react-icons/md";
+import { MdAddToPhotos, MdNotificationAdd } from "react-icons/md";
 import Admin_card_blog from "./components/admin_card_blog";
 import Add_blog from "./Add_blog";
+import Analytics from "./analytics";
 
 function Sysblog() {
   const [addblog, setaddblog] = useState(false);
@@ -16,6 +17,8 @@ function Sysblog() {
   const [posts, setPosts] = useState([]);
 
   const [mobilePop, setmobilePop] = useState(false);
+
+  const [analyticsOpen, setanalyticsOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,6 +38,7 @@ function Sysblog() {
       <section id="navbar">
         <Admin_navbar />
         {addblog && <Add_blog closeblog={setaddblog} />}
+        {analyticsOpen && <Analytics closeMyAnalytics={setanalyticsOpen} />}
       </section>
       <section id="content">
         <div class="admin_hero">
@@ -56,7 +60,9 @@ function Sysblog() {
               className="mobile_poptext_display"
               onClick={() => setmobilePop(!mobilePop)}
             >
-              <label>Other</label> <MdArrowDropDown />
+              <h3>
+                Others <MdNotificationAdd />
+              </h3>
             </span>
           </div>
 
@@ -76,7 +82,7 @@ function Sysblog() {
             </div>
 
             <div className="add_post">
-              <button>
+              <button onClick={() => setanalyticsOpen(true)}>
                 Analytics
                 <span class="pop_chart">
                   <AiOutlineBarChart />

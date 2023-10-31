@@ -131,7 +131,8 @@ function Blogpost() {
         {/*---------- comment DOM section start --------- */}
 
         <div className="comment_heading">
-          <span className="pop"></span> <h4>Comments </h4>
+          <span className="pop"></span>
+          {comment_view && comment_view.length} <h4>Comments </h4>
         </div>
         <hr />
         <br />
