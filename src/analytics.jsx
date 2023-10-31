@@ -1,5 +1,4 @@
 import React, { useState,useEffect,PureComponent } from "react";
-import Piechart from "./piechart";
 import Areanalytics from "./areanalytics";
 import {
   ComposedChart,
@@ -37,6 +36,9 @@ useEffect(() => {
   };
   fetchData();
 }, []);
+// let comment_view = post.comment;
+
+// console.log("comment_view: ", comment_view);
 
 const data = [
   {
@@ -103,9 +105,11 @@ const data = [
           <div className="charts">
             <center>
               {" "}
-              <h2>Area Chart</h2> <Areanalytics />
+              <h2>Area Chart</h2> 
+              <Areanalytics />
             </center>
           </div>
+
         </div>
       </div>
     );
