@@ -33,11 +33,7 @@ export const Editmodel = ({ closeEditModel, blogId }) => {
 
   const handleSaveClick = (e) => {
     e.preventDefault();
-    // const data = {
-    //   blogTitle: blogTitle,
-    //   blogContent: blogContent,
-    //   blogImage: blog_Image,
-    // };
+  
     const updData = new FormData();
     updData.append("blogTitle", blogTitle);
     updData.append("blogContent", blogContent);

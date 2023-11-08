@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 export const GatewayModel = ({ closeGatewayModel, onSuccessfulLogin }) => {
   const navigate = useNavigate();
@@ -47,7 +48,9 @@ export const GatewayModel = ({ closeGatewayModel, onSuccessfulLogin }) => {
       if (response.status === 200 || response.status === 201) {
         const responseData = await response.json();
         console.log("response", responseData);
-        alert("USER registered succesfully");
+        toast.success("USER registered succesfully", {
+          position: "top-center",
+        });
         setfirstname("");
         setlastname("");
         setEmail("");
@@ -55,7 +58,9 @@ export const GatewayModel = ({ closeGatewayModel, onSuccessfulLogin }) => {
         setProfile("");
       } else if (response.status === 500) {
         console.log("Email already exists");
-        alert("Email Already exists");
+        toast.warning("Email Already exists", {
+          position: "top-center",
+        });
         setfirstname("");
         setlastname("");
         setEmail("");
@@ -63,7 +68,9 @@ export const GatewayModel = ({ closeGatewayModel, onSuccessfulLogin }) => {
         setProfile("");
       } else {
         console.log("Failed to register your INFO");
-        alert("Failed to register your INFO");
+        toast.error("Failed to register your INFO", {
+          position: "top-center",
+        });
         setfirstname("");
         setlastname("");
         setEmail("");
@@ -92,16 +99,27 @@ export const GatewayModel = ({ closeGatewayModel, onSuccessfulLogin }) => {
 
       if (responses.ok) {
         const responseData = await responses.json();
-        console.log("response", responseData);
+
         localStorage.setItem("token", responseData.token);
         sessionStorage.setItem("email", responseData.users.email);
-        alert("Logged In successfully");
+        console.log("response", responseData);
+
         console.log(responseData?.users?.role);
+
         if (responseData?.users?.role === "admin") {
-          // window.location = "./Sys_blog";
+          alert("Admin Verfication Complete");
           navigate("/Sys_blog");
+          // toast.success("Logged in succesfully", {
+          //   position: "top-center",
+          // });
+
+          // // window.location = "./Sys_blog";
+          // setTimeout(() => {
+          //   navigate("/Sys_blog");
+          // }, 5000);
         } else {
           // window.location = "./blogpost";
+          alert("Welcome back Dear User");
           navigate("/");
         }
         setEmail("");
@@ -110,7 +128,9 @@ export const GatewayModel = ({ closeGatewayModel, onSuccessfulLogin }) => {
         closeGatewayModel(false);
       } else {
         console.log("Failed to login");
-        alert("Ooops, failed to login");
+        toast.error("Ooops, failed to login", {
+          position: "top-center",
+        });
 
         setEmail("");
         setPassword("");
@@ -236,6 +256,7 @@ export const GatewayModel = ({ closeGatewayModel, onSuccessfulLogin }) => {
             </form>
           )}
         </div>
+        <ToastContainer />
       </div>
     </>
   );

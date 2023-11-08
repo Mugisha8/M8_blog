@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Admin_navbar from "./components/Admin_navbar";
-
 import Footer from "./components/footer";
-
 import { FiMoreVertical, FiSettings } from "react-icons/Fi";
 import { AiOutlineBarChart } from "react-icons/ai";
 import { MdAddToPhotos, MdNotificationAdd } from "react-icons/md";

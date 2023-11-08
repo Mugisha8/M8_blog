@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Add_blog = ({ closeblog }) => {
   const navigate = useNavigate();
-  // const editor = useRef(null);
+  const editor = useRef(null);
   const [blogContent, setblogContent] = useState("");
 
   const [blogTitle, setblogTitle] = useState("");
@@ -82,20 +82,18 @@ const Add_blog = ({ closeblog }) => {
               value={blogTitle}
               onChange={(e) => setblogTitle(e.target.value)}
             />
-            <b>
-              <label>Description</label>
-            </b>
-            <textarea
+           
+            {/* <textarea
               className="addblog_desc"
               placeholder="blog Description..."
               value={blogContent}
               onChange={(e) => setblogContent(e.target.value)}
-            ></textarea>
-            {/* <JoditEditor
+            ></textarea> */}
+            <JoditEditor
               ref={editor}
               value={blogContent}
               onChange={(newblogContent) => setblogContent(newblogContent)}
-            /> */}
+            />
 
             <input
               type="file"

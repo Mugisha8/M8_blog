@@ -547,6 +547,10 @@ form {
   border-radius: 20px;
 }
 
+.location_map{
+  width: 100%;
+}
+
 /*------------------edit model---------------------------*/
 
 .edit_blog_background {
@@ -696,6 +700,8 @@ form {
   #content_blog {
     padding: 18% 6%;
   }
+
+
 
   .addblog {
     display: grid;

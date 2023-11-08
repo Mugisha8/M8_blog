@@ -45,11 +45,11 @@ const data = [
   },
   {
     name: "Comments",
-    messages: 967,
+    messages: 3,
   },
   {
     name: "views",
-    watch: 1098,
+    watch: 18,
   },
 ];
 
@@ -63,7 +63,7 @@ const data = [
           X
         </button>
         <div className="analytics_model_container">
-          <div className="charts" style={{ width: "500px", height: "500px" }}>
+          <div className="charts" style={{ width: "510px", height: "510px" }}>
             <center>
               {" "}
               <h2>Bar Chart</h2>{" "}

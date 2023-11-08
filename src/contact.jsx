@@ -4,13 +4,6 @@ import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 
 const Contact = () => {
-  const Contacts = [
-    {
-      photo:
-        "https://images.unsplash.com/photo-1587560699334-bea93391dcef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29udGFjdCUyMHVzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-    },
-  ];
-
   return (
     <>
       <section id="navbar">
@@ -18,9 +11,15 @@ const Contact = () => {
       </section>
       <section id="contact_content">
         <div className="contact_cover">
-          {Contacts.map((contcover, index) => (
-            <CoverImage key={index} image={contcover.photo} />
-          ))}
+          <iframe
+            className="location_map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31899.962567131184!2d30.0435194541414!3d-1.9552698237260555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca42991d5abed%3A0xcad912f40dd45dc5!2sKiyovu%2C%20Kigali!5e0!3m2!1sen!2srw!4v1699451210068!5m2!1sen!2srw"
+            width="600"
+            height="450"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
         <h2>Get in Touch</h2>
         <p>
@@ -80,9 +79,7 @@ const Contact = () => {
               placeholder="Your Email"
               className="contact_text"
             />
-            <textarea placeholder="Message">
-
-            </textarea>
+            <textarea placeholder="Message"></textarea>
             <button>SEND MESSAGE</button>
           </form>
         </div>
