@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import Comment from "./components/Comment";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Blogpost() {
   const { _id } = useParams();
@@ -58,7 +60,9 @@ function Blogpost() {
     // console.log("token", token);
 
     if (!token) {
-      alert("First Login to post your comment");
+      toast.warn("First Login to post your comment", {
+        position: "top-center",
+      });
     }
 
     try {
@@ -74,17 +78,17 @@ function Blogpost() {
       console.log("postdata", postdata);
 
       if (response.status === 201) {
-        alert("comment Posted");
+        toast.success("comment Posted");
         console.log(response.data);
         setpostcomment("");
         displayAll();
       } else {
-        alert("comment post failed");
+        toast.error("comment post failed");
         console.log(response.data);
       }
     } catch (error) {
       console.log("error", error);
-      alert("an error occured while posting");
+      toast.error("an error occured while posting");
     }
   };
 
@@ -175,6 +179,7 @@ function Blogpost() {
       <section id="footer">
         <Footer />
       </section>
+      <ToastContainer />
     </>
   );
 }

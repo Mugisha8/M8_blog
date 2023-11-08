@@ -3,6 +3,7 @@ import axios from "axios";
 import { Editmodel } from "./editmodel";
 import { LuView } from "react-icons/Lu";
 
+
 const Admin_card_blog = ({ id, title, Description, image, views }) => {
   const [editOpen, setEditOpen] = useState(false);
 
@@ -41,9 +42,12 @@ const Admin_card_blog = ({ id, title, Description, image, views }) => {
 
         <h4>{title}</h4>
 
-        <div className="desc">
-          <p>{Description.substring(0, 230)}</p>
-        </div>
+        <div className="desc" 
+          dangerouslySetInnerHTML= {{ __html: Description.substring(0, 230)}}
+          />
+        
+            
+       
 
         <div className="modification">
           <button className="views">
